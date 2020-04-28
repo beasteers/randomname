@@ -1,6 +1,6 @@
 # randomname
 
-Generate random ids using real human words (in english) - like docker containers or github repos.
+Generate random unique ids using real words - like docker containers or github repos.
 
 Often, I get tired of trying to hunt down files in folders differentiated by some numeric id, and unless I need to encode a timestep into the name, I'd rather use an id that's memorable and easy to type.
 
@@ -69,5 +69,4 @@ name = randomname.generate(
 # these contain the available groups
 print('adjective categories:', randomname.ADJECTIVES)
 print('noun categories:', randomname.NOUNS)
-
 ```
