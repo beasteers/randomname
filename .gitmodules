@@ -1,0 +1,3 @@
+[submodule "wordlists"]
+	path = wordlists
+	url = https://github.com/imsky/wordlists
