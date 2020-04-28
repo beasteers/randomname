@@ -5,7 +5,7 @@ NAME = 'randomname'
 
 setuptools.setup(
     name=NAME,
-    version='0.0.3',
+    version='0.0.4',
     description='Generate random adj-noun names like docker and github.',
     long_description=open('README.md').read().strip(),
     long_description_content_type='text/markdown',
@@ -15,6 +15,6 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     package_data={NAME: ['wordlists/**/*.txt']},
     entry_points={'console_scripts': ['{name}={name}:main'.format(name=NAME)]},
-    install_requires=[],
+    install_requires=['fire'],
     license='MIT License',
     keywords='')

@@ -14,4 +14,4 @@ def main():
     import fire
     fire.Fire({
         'get': print_name, 'generate': print_generate,
-        'avail': available, 'sample': sample})
+        'available': available, 'sample': sample})
