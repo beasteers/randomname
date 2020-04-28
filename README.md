@@ -6,18 +6,6 @@ Often, I get tired of trying to hunt down files in folders differentiated by som
 
 The wordlists are graciously sourced from: https://github.com/imsky/wordlists
 
-The lists include various word classes:
-- `adjectives` (`a`, `adj`) - ya know those describe-y things
-    - e.g. `a/colors`, `adj/shape`, `adjectives/sound`
-- `nouns` (`n`, `nn`) - people, places, things dawg
-    - e.g. `n/cats`, `nn/ghosts`, `nouns/wine`
-- `verbs` (`v`, `vb`) - doing things
-    - e.g. `v/art`, `vb/3d_graphics`
-- `names` (`nm`) - things like surnames, streets, cities, etc.
-    - e.g. `nm/cities`, `names/codenames`
-- `ipsum` (`ip`) - misc.
-    - e.g. `ip/reddit`, `ipsum/blockchain`
-
 ## Install
 
 ```bash
@@ -52,6 +40,18 @@ $ randomname generate v/art,v/thought a/sound n/apex_predators
 $ randomname generate v/fire a/music_theory n/cats cat
 # toast-adagio-angora-cat
 ```
+
+The lists include various word classes:
+- `adjectives` (`a`, `adj`) - ya know those describe-y things
+    - e.g. `a/colors`, `adj/shape`, `adjectives/sound`
+- `nouns` (`n`, `nn`) - people, places, things dawg
+    - e.g. `n/cats`, `nn/ghosts`, `nouns/wine`
+- `verbs` (`v`, `vb`) - doing things
+    - e.g. `v/art`, `vb/3d_graphics`
+- `names` (`nm`) - things like surnames, streets, cities, etc.
+    - e.g. `nm/cities`, `names/codenames`
+- `ipsum` (`ip`) - misc.
+    - e.g. `ip/reddit`, `ipsum/blockchain`
 
 ## It's importable too!
 
