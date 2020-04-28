@@ -1,3 +1,3 @@
 [submodule "wordlists"]
-	path = wordlists
+	path = randomname/wordlists
 	url = https://github.com/imsky/wordlists
