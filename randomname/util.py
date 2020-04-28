@@ -64,7 +64,7 @@ def doalias(fname, fmt='{}'):
     return fname
 
 def safepath(f):
-    os.path.abspath('/' + f).lstrip('/')
+    return os.path.abspath('/' + f).lstrip('/')
 
 def prefix(pre, xs):
     '''Prefix all items with a path prefix.'''
