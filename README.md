@@ -72,7 +72,7 @@ print('noun categories:', randomname.NOUNS)
 ```
 
 ## Available
-adjectives: 
+adjectives:
 > `speed`, `weather`, `shape`, `sound`, `physics`, `temperature`, `corporate_prefixes`, `complexity`, `colors`, `taste`, `quantity`, `size`, `algorithms`, `geometry`, `materials`, `construction`, `music_theory`, `appearance`, `linguistics`, `emotions`, `age`, `character`
 
 nouns:      
@@ -83,3 +83,6 @@ verbs:
 
 ipsum:
 > `corporate`, `hipster`, `blockchain`, `lorem`, `reddit`
+
+## Examples
+> `extremal-cluster`, `cerulean-portal`, `afraid-cabana`, `forward-segment`, `angry-croissant`, `coffee-shore`, `binding-frontlist`, `nondeterministic-wall`, `cool-quail`, `optical-valid`, `ornery-solenoid`, `immense-aside`, `square-loan`, `fast-limiter`, `wicker-tritone`, `white-commander`, `wan-flam`, `violent-slider`, `isothermal-lark`, `seething-luggage`, `resolving-section`, `steel-snippet`, `shortest-linkage`, `oscillating-palisade`, `tense-nailer`, `adjacent-sea`, `mechanical-molding`, `cold-feed`, `either-scene`, `crazy-boundary`, `simple-bass`, `roaring-annuity`, `paper-melt`, `scared-angle`, `shiny-hydrolysis`, `ornery-pretzel`, `brute-force-keel`, `worn-cliff`, `brownian-contingency`, `naive-shop`, `heartless-object`, `bronze-microphone`, `universal-yeoman`, `icy-reflection`, `blue-cliche`, `forward-integrator`, `trusting-cobra`, `online-assignment`, `religious-gun`, `quiet-hook`, `blaring-quaver`, `archaic-height`, `eager-oboe`, `leather-narrator`, `shortest-bucket`, `free-matrix`, `radioactive-loss`, `glossy-take`, `formal-schema`, `quantum-agreement`, `local-bit`, `bone-centroid`, `cyan-resin`, `mild-chimpanzee`, `mute-bugle`, `amiable-margin`, `basic-pond`, `humane-tangerine`, `horizontal-bocaccio`, `big-export`, `pleasant-facet`, `fixed-glass`, `muffled-futon`, `volumetric-simulation`, `piercing-skier`, `pleasant-observatory`, `honest-hound`, `cross-recon`, `future-surface`, `ash-crew`, `medium-stunt`, `latent-mayonnaise`, `nippy-valance`, `open-gate`, `crazy-papaya`, `khaki-bat`, `honest-melon`, `congruent-truss`, `express-flat`, `glad-simulation`, `sizzling-parakeet`, `interior-pantone`, `coplanar-gully`, `merciless-mud`, `direct-asadero`, `several-jackdaw`, `wide-agent`, `fixed-heather`, `kind-slab`, `genteel-designer`
