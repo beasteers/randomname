@@ -1,5 +1,6 @@
 import functools
 from .core import *
+from . import util
 
 def main():
     # need to wrap these so they go to stdout - idk whats going on
@@ -14,4 +15,4 @@ def main():
     import fire
     fire.Fire({
         'get': print_name, 'generate': print_generate,
-        'available': available, 'sample': sample})
+        'available': available, 'sample': sample, 'util': util})

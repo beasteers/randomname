@@ -36,7 +36,7 @@ $ randomname generate adj/sound n/apex_predators
 $ randomname generate v/art,v/thought a/sound n/apex_predators
 # doodle-silent-salamander
 
-# mix in your own words:
+# mix in your own words (e.g. "cat"):
 $ randomname generate v/fire a/music_theory n/cats cat
 # toast-adagio-angora-cat
 ```
