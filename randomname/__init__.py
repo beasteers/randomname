@@ -3,16 +3,14 @@ from .core import *
 from . import util
 
 def main():
-    # need to wrap these so they go to stdout - idk whats going on
-    @functools.wraps(get_name)
-    def print_name(*a, **kw):
-        print(get_name(*a, **kw))
-
-    @functools.wraps(generate)
-    def print_generate(*a, **kw):
-        print(generate(*a, **kw))
-
     import fire
     fire.Fire({
-        'get': print_name, 'generate': print_generate,
+        'get': prints(get_name), 'generate': prints(generate),
         'available': available, 'sample': sample, 'util': util})
+
+def prints(func):
+    # need to wrap funcs so they go to stdout - idk whats going on
+    @functools.wraps(func)
+    def inner(*a, **kw):
+        print(func(*a, **kw))
+    return inner

@@ -176,9 +176,10 @@ def prefix(pre, xs):
     return [os.path.join(pre, x.lstrip('/')) for x in as_multiple(xs)]
 
 
-def choose(l):
+def choose(items, n=None):
     '''Choose one item from a list.'''
-    return random.choice(as_multiple(l))
+    items = as_multiple(items)
+    return random.choice(items) if n is None else random.choices(items, k=n)
 
 
 def as_multiple(x):
