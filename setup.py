@@ -17,4 +17,5 @@ setuptools.setup(
     entry_points={'console_scripts': ['{name}={name}:main'.format(name=NAME)]},
     install_requires=['fire'],
     license='MIT License',
-    keywords='')
+    keywords='random name generator docker container github repo '
+             'word list noun adjective verb')
