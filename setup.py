@@ -5,7 +5,7 @@ NAME = 'randomname'
 
 setuptools.setup(
     name=NAME,
-    version='0.1.1',
+    version='0.1.2',
     description='Generate random adj-noun names like docker and github.',
     long_description=open('README.md').read().strip(),
     long_description_content_type='text/markdown',
