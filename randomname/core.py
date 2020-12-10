@@ -6,7 +6,7 @@ def generate(*groups, sep='-'):
     '''Generate words from a sequence of word class/categories.'''
     return sep.join(
         util.choose(util.get_groups_list(x)).replace(' ', sep)
-        for x in groups)
+        for x in groups or ('adj/', 'n/'))
 
 def get_name(adj=ADJECTIVES, noun=NOUNS, sep='-'):
     '''Get a random adjective-noun using the categories in `adj` and `noun`.'''
@@ -22,9 +22,7 @@ def sample(*groups, n=10, sep='-'):
 
 def sample_words(*groups, n=10):
     '''Get a random sample of a category.'''
-    l = util.get_groups_list(groups)
-    util.random.shuffle(l)
-    return l[:n]
+    return util.random.sample(util.get_groups_list(groups), n)
 
 
 def sample_names(n=10, adj=ADJECTIVES, noun=NOUNS, sep='-'):
@@ -37,4 +35,4 @@ def sample_names(n=10, adj=ADJECTIVES, noun=NOUNS, sep='-'):
 
 def available(k=None):
     '''Show available categories for a word class.'''
-    return ALL_CATEGORIES[util.doalias(k)] if k else AVAILABLE
+    return AVAILABLE[util.doalias(k)] if k else AVAILABLE
