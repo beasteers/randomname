@@ -33,6 +33,15 @@ ALIASES = {
     'adj': 'adjectives',
     'nn': 'nouns',
     'vb': 'verbs',
+    'u': 'uuid',
+    'uu': 'uuid',
+}
+
+import uuid
+def uuid_(n=None):
+    return str(uuid.uuid4())[:n and int(n)]
+WORD_FUNCS = {
+    'uuid': uuid_,
 }
 
 
@@ -60,6 +69,10 @@ def load(name):
 @functools.lru_cache(128)
 def load_file(name):
     '''Load a wordlist. Does not do any name conversion.'''
+    parts = name.split('/')
+    if parts[0] in WORD_FUNCS:
+        return [functools.partial(WORD_FUNCS[parts[0]], *(p for p in parts[1:] if p != '*'))]
+
     with open(as_valid_path(name, required=True), 'r') as f:
         return [
             l for l in (l.strip() for l in f.readlines())
@@ -77,6 +90,12 @@ def get_matched_categories(name, *a, **kw):
     matches = [f for f in ALL_CATEGORIES if fnmatch.fnmatch(f, name)]
     if matches:
         return matches
+
+    parts = name.split('/', 1)
+    matches = ['/'.join((f, parts[1])) for f in WORD_FUNCS if fnmatch.fnmatch(f, parts[0])]
+    if matches:
+        return matches
+
     # no matches. throw nice error
     matches = close_matches(name, *a, **kw)
     raise ValueError("No matching wordlist '{}'. {}".format(
@@ -106,6 +125,8 @@ def close_matches(name, cutoff=0.65):
         # they entered a misspelled category and misspelled group
         else:
             matches += _get_matches(name, ALL_CATEGORIES, cutoff=cutoff)
+        _ms = _get_matches(part0, list(WORD_FUNCS), cutoff=cutoff)
+        matches += ['{}/{}'.format(m, part1) for m in _ms]
     else:
         # get sub matches
         _ms = _get_matches(name, all_sub_categories, cutoff=cutoff)
@@ -187,13 +208,33 @@ def prefix(pre, xs):
 def choose(items, n=None):
     '''Choose one item from a list.'''
     items = as_multiple(items)
-    return random.choice(items) if n is None else random.choices(items, k=n)
+    x = random.choice(items) if n is None else random.choices(items, k=n)
+
+    if isinstance(x, list):
+        x = [xi() if callable(xi) else xi for xi in x]
+    elif callable(x):
+        x = x()
+    return x
+
+def sample_unique(func, n, *a, n_fails=50, unique=True, **kw):
+    if not unique:
+        return [func(*a, **kw) for _ in range(n)]
+    words = set()
+    for i in range(n):
+        for j in range(n_fails):
+            words.add(func(*a, **kw))
+            if len(words) > i:
+                break
+        else:
+            break
+    return words
 
 
 def as_multiple(x):
     '''Ensure a list or tuple.'''
     x = x if isinstance(x, (list, tuple)) else [x]
-    return [si for s in (str(s) for s in x) for si in s.split(',')]
+    return [si for s in x for si in ([s] if callable(s) else str(s).split(','))]
+
 
 
 def find_parts_of_speech(name):

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+ - added `randomname saved` (or `randomname.SavedList()`) to let you precompute the IDs in a set order and access them by index. Their values are stored in json under `~/.randomname`
+ - `sample()` now guarantees unique values. Disable using `unique=False`. If `n_fails (default 50)` to draw a unique value occur in a row, then sample will return under-sampled
+
 ## 0.1.0
 
 ### core

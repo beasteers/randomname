@@ -7,14 +7,15 @@ def main():
     fire.Fire({
         'get': prints(get_name), 'generate': prints(generate),
         'available': available, 'sample': prints(sample), 'util': util,
-        'sample_words': sample_words})
+        'sample_words': sample_words, 'sample_names': sample_names, 
+        'saved': SavedList})
 
 def prints(func):
     # need to wrap funcs so they go to stdout - idk whats going on
     @functools.wraps(func)
     def inner(*a, **kw):
         x = func(*a, **kw)
-        if isinstance(x, (list, tuple)):
+        if isinstance(x, (list, tuple, set)):
             for i in x:
                 print(i)
         elif isinstance(x, dict):
