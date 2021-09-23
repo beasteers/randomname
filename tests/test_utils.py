@@ -32,23 +32,23 @@ def test_close_matches():
         'nouns/music_instruments',
     }
     # test specific group
-    assert randomname.util.close_matches('n/music') == [
-        'nouns/music_production', 'nouns/music_instruments', 'nouns/music_theory']
-    assert randomname.util.close_matches('nouns/music') == [
-        'nouns/music_production', 'nouns/music_instruments', 'nouns/music_theory']
-    assert randomname.util.close_matches('v/music') == [
-        'verbs/music', 'verbs/music_production']
-    assert randomname.util.close_matches('a/music') == ['adjectives/music_theory']
+    assert set(randomname.util.close_matches('n/music')) == {
+        'nouns/music_production', 'nouns/music_instruments', 'nouns/music_theory'}
+    assert set(randomname.util.close_matches('nouns/music')) == {
+        'nouns/music_production', 'nouns/music_instruments', 'nouns/music_theory'}
+    assert set(randomname.util.close_matches('v/music')) == {
+        'verbs/music', 'verbs/music_production'}
+    assert set(randomname.util.close_matches('a/music')) == {'adjectives/music_theory'}
 
     # test fnmatch
-    assert randomname.util.close_matches('a/*usic') == []
-    assert randomname.util.close_matches('a/*usic*') == ['adjectives/music_theory']
+    assert set(randomname.util.close_matches('a/*usic')) == set()
+    assert set(randomname.util.close_matches('a/*usic*')) == {'adjectives/music_theory'}
 
     # test partials/misc
-    assert randomname.util.close_matches('tast') == ['adjectives/taste']
-    assert randomname.util.close_matches('tasty') == ['adjectives/taste']
-    assert randomname.util.close_matches('tasty', 0.4) == [
-        'adjectives/taste', 'nouns/astronomy', 'nouns/metals']
+    assert set(randomname.util.close_matches('tast')) == {'adjectives/taste'}
+    assert set(randomname.util.close_matches('tasty')) == {'adjectives/taste'}
+    assert set(randomname.util.close_matches('tasty', 0.4)) == {
+        'adjectives/taste', 'nouns/astronomy', 'nouns/metals'}
     assert set(randomname.util.close_matches('phy')) == {
         'adjectives/physics',
         'nouns/physics',
