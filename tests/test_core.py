@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import randomname
 
 
@@ -15,3 +17,10 @@ def test_generate():
     assert name[1] in randomname.util.get_groups_list('a/music_theory')
     assert name[2] in randomname.util.get_groups_list('n/food')
     assert name[0] not in randomname.util.get_groups_list('n/food')
+
+def test_generated_names_are_valid_file_names(tmp_path: Path):
+    names = randomname.generate()
+
+    for name in names:
+        # does not raise
+        (Path(tmp_path) / name).touch()

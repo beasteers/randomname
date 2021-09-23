@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import randomname
 
 
@@ -23,36 +25,56 @@ def test_load():
 
 def test_close_matches():
     # test underspecified
-    assert set(randomname.util.close_matches('music')) == {
-        'verbs/music',
-        'nouns/music_theory',
-        'adjectives/music_theory',
-        'nouns/music_production',
-        'verbs/music_production',
-        'nouns/music_instruments',
-    }
+    matches = randomname.util.close_matches('music')
+    assert {Path(m) for m in matches} == {
+            Path('verbs/music'),
+            Path('nouns/music_theory'),
+            Path('adjectives/music_theory'),
+            Path('nouns/music_production'),
+            Path('verbs/music_production'),
+            Path('nouns/music_instruments'),
+        }
+
     # test specific group
-    assert set(randomname.util.close_matches('n/music')) == {
-        'nouns/music_production', 'nouns/music_instruments', 'nouns/music_theory'}
-    assert set(randomname.util.close_matches('nouns/music')) == {
-        'nouns/music_production', 'nouns/music_instruments', 'nouns/music_theory'}
-    assert set(randomname.util.close_matches('v/music')) == {
-        'verbs/music', 'verbs/music_production'}
-    assert set(randomname.util.close_matches('a/music')) == {'adjectives/music_theory'}
+    for name in ['n/music', 'nouns/music']:
+        matches = randomname.util.close_matches(name)
+        assert {Path(m) for m in matches} == {
+            Path('nouns/music_production'),
+            Path('nouns/music_instruments'),
+            Path('nouns/music_theory')
+        }
+
+    matches = randomname.util.close_matches('v/music')
+    assert {Path(m) for m in matches} == {
+        Path('verbs/music'), Path('verbs/music_production')}
+
+    matches = randomname.util.close_matches('a/music')
+    assert {Path(m) for m in matches} == {Path('adjectives/music_theory')}
 
     # test fnmatch
     assert set(randomname.util.close_matches('a/*usic')) == set()
-    assert set(randomname.util.close_matches('a/*usic*')) == {'adjectives/music_theory'}
+
+    matches = randomname.util.close_matches('a/*usic*')
+    assert {Path(m) for m in matches} == {Path('adjectives/music_theory')}
 
     # test partials/misc
-    assert set(randomname.util.close_matches('tast')) == {'adjectives/taste'}
-    assert set(randomname.util.close_matches('tasty')) == {'adjectives/taste'}
-    assert set(randomname.util.close_matches('tasty', 0.4)) == {
-        'adjectives/taste', 'nouns/astronomy', 'nouns/metals'}
-    assert set(randomname.util.close_matches('phy')) == {
-        'adjectives/physics',
-        'nouns/physics',
-        'nouns/physics_waves',
-        'nouns/physics_units',
-        'nouns/physics_optics',
+    for name in ['tast', 'tasty']:
+        matches = randomname.util.close_matches(name)
+        assert {Path(m) for m in matches} == {
+            Path('adjectives/taste'),
+        }
+
+    matches = randomname.util.close_matches('tasty', 0.4)
+    assert {Path(m) for m in matches} == {
+        Path('adjectives/taste'),
+        Path('nouns/astronomy'),
+        Path('nouns/metals')}
+
+    matches = randomname.util.close_matches('phy')
+    assert {Path(m) for m in matches} == {
+        Path('adjectives/physics'),
+        Path('nouns/physics'),
+        Path('nouns/physics_waves'),
+        Path('nouns/physics_units'),
+        Path('nouns/physics_optics'),
     }

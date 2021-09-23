@@ -107,9 +107,8 @@ def close_matches(name, cutoff=0.65):
     '''Find close matching wordlist names.'''
     # they entered a underspecified category
     name = doalias(name)
-    matches = [cat for cat in ALL_CATEGORIES if name == cat.split('/', 1)[1]]
-    all_sub_categories = [c.split('/', 1)[-1] for c in ALL_CATEGORIES]
-
+    matches = [cat for cat in ALL_CATEGORIES if name == cat.split(os.sep, 1)[1]]
+    all_sub_categories = [c.split(os.sep, 1)[-1] for c in ALL_CATEGORIES]
     if '/' in name:
         part0, part1 = name.split('/', 1)
         if not part0:
@@ -117,10 +116,12 @@ def close_matches(name, cutoff=0.65):
         # they spelled the first part correctly
         if part0 in WORD_CLASSES:
             _ms = _get_matches(part1, AVAILABLE[part0], cutoff=cutoff)
+            # TODO: This uses actual file names while the other ones uses names
             matches += [f for f in ('{}/{}'.format(part0, m) for m in _ms) if as_valid_path(f)]
         # they entered a misspelled category
         elif part1 in all_sub_categories:
             _ms = _get_matches(part0, [k for k in AVAILABLE if part1 in AVAILABLE[k]], cutoff=cutoff)
+            # TODO: This uses actual file names while the other ones uses names
             matches += [f for f in ('{}/{}'.format(m, part1) for m in _ms) if as_valid_path(f)]
         # they entered a misspelled category and misspelled group
         else:
@@ -188,7 +189,9 @@ def doalias(fname):
 
 def safepath(f):
     '''Make sure a path doesn't go up any directories.'''
-    return os.path.abspath('/' + f).lstrip('/')
+    name_parts = f.split("/")
+    name_parts = [part for part in name_parts if not part.startswith("..")]
+    return os.path.join(*name_parts)
 
 
 def as_valid_path(name, required=False):
@@ -202,7 +205,7 @@ def as_valid_path(name, required=False):
 
 def prefix(pre, xs):
     '''Prefix all items with a path prefix.'''
-    return [os.path.join(pre, x.lstrip('/')) for x in as_multiple(xs)]
+    return [f"{pre}/{x.lstrip('/')}" for x in as_multiple(xs)]
 
 
 def choose(items, n=None):
