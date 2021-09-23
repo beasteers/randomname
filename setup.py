@@ -16,6 +16,7 @@ setuptools.setup(
     package_data={NAME: ['wordlists/**/*.txt']},
     entry_points={'console_scripts': ['{name}={name}:main'.format(name=NAME)]},
     install_requires=['fire'],
+    tests_require=['pytest'],
     license='MIT License',
     keywords='random name generator docker container github repo '
              'word list noun adjective verb')
