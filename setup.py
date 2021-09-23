@@ -19,4 +19,11 @@ setuptools.setup(
     tests_require=['pytest'],
     license='MIT License',
     keywords='random name generator docker container github repo '
-             'word list noun adjective verb')
+             'word list noun adjective verb',
+    classifiers=[
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+    ]
+)
