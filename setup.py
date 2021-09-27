@@ -16,6 +16,14 @@ setuptools.setup(
     package_data={NAME: ['wordlists/**/*.txt']},
     entry_points={'console_scripts': ['{name}={name}:main'.format(name=NAME)]},
     install_requires=['fire'],
+    tests_require=['pytest'],
     license='MIT License',
     keywords='random name generator docker container github repo '
-             'word list noun adjective verb')
+             'word list noun adjective verb',
+    classifiers=[
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+    ]
+)
