@@ -6,6 +6,8 @@ Often, I get tired of trying to hunt down files in folders differentiated by som
 
 The wordlists are graciously sourced from: https://github.com/imsky/wordlists
 
+> NOTICE: If you come across any words in these wordlists that are offensive, pleaseplspls report them to me in an issue! Any of these word lists used come from external sources and there are lots of words.
+
 ## Install
 
 ```bash
