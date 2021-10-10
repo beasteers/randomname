@@ -107,8 +107,9 @@ def close_matches(name, cutoff=0.65):
     '''Find close matching wordlist names.'''
     # they entered a underspecified category
     name = doalias(name)
-    matches = [cat for cat in ALL_CATEGORIES if name == cat.split(os.sep, 1)[1]]
-    all_sub_categories = [c.split(os.sep, 1)[-1] for c in ALL_CATEGORIES]
+    matches = [cat for cat in ALL_CATEGORIES if name == cat.split('/', 1)[1]]
+    all_sub_categories = [c.split('/', 1)[-1] for c in ALL_CATEGORIES]
+
     if '/' in name:
         part0, part1 = name.split('/', 1)
         if not part0:
@@ -116,12 +117,10 @@ def close_matches(name, cutoff=0.65):
         # they spelled the first part correctly
         if part0 in WORD_CLASSES:
             _ms = _get_matches(part1, AVAILABLE[part0], cutoff=cutoff)
-            # TODO: This uses actual file names while the other ones uses names
             matches += [f for f in ('{}/{}'.format(part0, m) for m in _ms) if as_valid_path(f)]
         # they entered a misspelled category
         elif part1 in all_sub_categories:
             _ms = _get_matches(part0, [k for k in AVAILABLE if part1 in AVAILABLE[k]], cutoff=cutoff)
-            # TODO: This uses actual file names while the other ones uses names
             matches += [f for f in ('{}/{}'.format(m, part1) for m in _ms) if as_valid_path(f)]
         # they entered a misspelled category and misspelled group
         else:
@@ -189,23 +188,23 @@ def doalias(fname):
 
 def safepath(f):
     '''Make sure a path doesn't go up any directories.'''
-    name_parts = f.split("/")
-    name_parts = [part for part in name_parts if not part.startswith("..")]
-    return os.path.join(*name_parts)
+    name_parts = f.split('/')
+    name_parts = [part for part in name_parts if not part.startswith('..')]
+    return '/'.join(name_parts).lstrip('/')
 
 
 def as_valid_path(name, required=False):
-    path = os.path.join(WORD_PATH, safepath(name + '.txt'))
+    path = f'{WORD_PATH.rstrip("/")}/{safepath(name + ".txt")}'
     if not os.path.isfile(path):
         if required:
-            raise OSError("Wordlist '{}' does not exist.".format(name))
+            raise OSError(f"Wordlist '{name}' does not exist at location '{path}'.")
         return
     return path
 
 
 def prefix(pre, xs):
     '''Prefix all items with a path prefix.'''
-    return [f"{pre}/{x.lstrip('/')}" for x in as_multiple(xs)]
+    return [f'{pre.rstrip("/")}/{x.lstrip("/")}' for x in as_multiple(xs)]
 
 
 def choose(items, n=None):
@@ -249,9 +248,13 @@ def getallcategories(d=''):
     '''Get all categories (subdirectories) from a word class (adjectives,
     nouns, etc.)'''
     d = os.path.join(WORD_PATH, d)
-    return [
+    path_to_all_categories = [
         os.path.relpath(os.path.splitext(f)[0], d)
         for f in glob.glob(os.path.join(d, '**/*.txt'), recursive=True)]
+
+    # Replace OS-dependent separator with '/' which aligns with the input format
+    # of the users.
+    return [p.replace(os.sep, "/") for p in path_to_all_categories]
 
 
 # get all available word classes and categories.
