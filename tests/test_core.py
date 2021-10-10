@@ -19,8 +19,8 @@ def test_generate():
     assert name[0] not in randomname.util.get_groups_list('n/food')
 
 def test_generated_names_are_valid_file_names(tmp_path: Path):
-    names = randomname.generate()
+    random_names = [randomname.generate() for _ in range(10)]
 
-    for name in names:
+    for name in random_names:
         # does not raise
         (Path(tmp_path) / name).touch()
