@@ -187,7 +187,8 @@ def doalias(fname):
 
 
 def as_valid_path(name, required=False):
-    path = os.path.abspath(os.sep + name).lstrip(os.sep)
+    path = os.path.abspath(os.sep + name)
+    path = os.path.relpath(path, os.path.abspath(os.sep))
     path = os.path.join(WORD_PATH, path + '.txt')
     if not os.path.isfile(path):
         if required:
