@@ -188,21 +188,23 @@ def doalias(fname):
 
 def safepath(f):
     '''Make sure a path doesn't go up any directories.'''
-    return os.path.abspath('/' + f).lstrip('/')
+    name_parts = f.split('/')
+    name_parts = [part for part in name_parts if not part.startswith('..')]
+    return '/'.join(name_parts).lstrip('/')
 
 
 def as_valid_path(name, required=False):
-    path = os.path.join(WORD_PATH, safepath(name + '.txt'))
+    path = f'{WORD_PATH.rstrip("/")}/{safepath(name + ".txt")}'
     if not os.path.isfile(path):
         if required:
-            raise OSError("Wordlist '{}' does not exist.".format(name))
+            raise OSError(f"Wordlist '{name}' does not exist at location '{path}'.")
         return
     return path
 
 
 def prefix(pre, xs):
     '''Prefix all items with a path prefix.'''
-    return [os.path.join(pre, x.lstrip('/')) for x in as_multiple(xs)]
+    return [f'{pre.rstrip("/")}/{x.lstrip("/")}' for x in as_multiple(xs)]
 
 
 def choose(items, n=None):
@@ -246,9 +248,13 @@ def getallcategories(d=''):
     '''Get all categories (subdirectories) from a word class (adjectives,
     nouns, etc.)'''
     d = os.path.join(WORD_PATH, d)
-    return [
+    path_to_all_categories = [
         os.path.relpath(os.path.splitext(f)[0], d)
         for f in glob.glob(os.path.join(d, '**/*.txt'), recursive=True)]
+
+    # Replace OS-dependent separator with '/' which aligns with the input format
+    # of the users.
+    return [p.replace(os.sep, "/") for p in path_to_all_categories]
 
 
 # get all available word classes and categories.
