@@ -186,15 +186,9 @@ def doalias(fname):
     return '/'.join(parts)
 
 
-def safepath(f):
-    '''Make sure a path doesn't go up any directories.'''
-    name_parts = f.split('/')
-    name_parts = [part for part in name_parts if not part.startswith('..')]
-    return '/'.join(name_parts).lstrip('/')
-
-
 def as_valid_path(name, required=False):
-    path = f'{WORD_PATH.rstrip("/")}/{safepath(name + ".txt")}'
+    path = os.path.abspath(os.sep + name).lstrip(os.sep)
+    path = os.path.join(WORD_PATH, path + '.txt')
     if not os.path.isfile(path):
         if required:
             raise OSError(f"Wordlist '{name}' does not exist at location '{path}'.")

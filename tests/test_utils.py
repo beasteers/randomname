@@ -1,3 +1,4 @@
+import os
 import randomname
 
 
@@ -7,10 +8,14 @@ def test_doalias():
     assert randomname.util.doalias('v/music') == 'verbs/music'
     assert randomname.util.doalias('nn/music') == 'nouns/music'
 
+opj = os.path.join
+PATH = os.path.abspath(os.path.join(__file__, '..', '..', 'randomname', 'wordlists'))
 
-def test_safepath():
-    assert randomname.util.safepath('../../../some-path') == 'some-path'
-    assert randomname.util.safepath('/some-path') == 'some-path'
+def test_valid_path():
+    path = opj(PATH, 'nouns', 'food') + '.txt'
+    assert randomname.util.as_valid_path('../../../nouns/food') == path
+    assert randomname.util.as_valid_path('nouns/food') == path
+    #assert randomname.util.as_valid_path(r'nouns\food') == path
 
 
 def test_prefix():
