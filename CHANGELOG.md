@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.5
+ - fix license mismatch (meant to do this in 0.1.4!)
+
 ## 0.1.4
  - added support for Windows paths (backslashes ugh lol).
  - now windows users can use forward slashes for categories, just like unix (platform independence! yay!)
