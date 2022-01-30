@@ -2,7 +2,7 @@
 get_groups_list
     resolve_fname
         load
-            load_file
+            load_wordlist
                 as_valid_path
             get_matched_categories
                 close_matches
@@ -16,12 +16,10 @@ import fnmatch
 import functools
 import random
 import difflib
+from . import wordlists
 
 
 WORD_CLASSES = ['adjectives', 'nouns', 'verbs', 'names', 'ipsum']
-
-# WORD_PATH = '../wordlists'
-WORD_PATH = os.path.join(os.path.dirname(__file__), 'wordlists')
 
 ALIASES = {
     'a': 'adjectives',
@@ -63,21 +61,20 @@ def load(name):
     Examples:
     >>> load('n/music') == ['arrange', 'carol', 'compose', ... 'yodel']
     '''
-    return [w for f in get_matched_categories(name) for w in load_file(f)]
+    return [w for f in get_matched_categories(name) for w in load_wordlist(f)]
 
 
 @functools.lru_cache(128)
-def load_file(name):
+def load_wordlist(name):
     '''Load a wordlist. Does not do any name conversion.'''
     parts = name.split('/')
     if parts[0] in WORD_FUNCS:
         return [functools.partial(WORD_FUNCS[parts[0]], *(p for p in parts[1:] if p != '*'))]
 
-    with open(as_valid_path(name, required=True), 'r') as f:
-        return [
-            l for l in (l.strip() for l in f.readlines())
-            if l and l[0] not in ';#']
-
+    if name in wordlists.wordlists:
+        return wordlists.wordlists[name]
+    else:
+        raise ValueError("No matching wordlist '{}'.".format(name))
 
 @functools.lru_cache(128)
 def get_matched_categories(name, *a, **kw):
@@ -187,14 +184,8 @@ def doalias(fname):
 
 
 def as_valid_path(name, required=False):
-    path = os.path.abspath(os.sep + name)
-    path = os.path.relpath(path, os.path.abspath(os.sep))
-    path = os.path.join(WORD_PATH, path + '.txt')
-    if not os.path.isfile(path):
-        if required:
-            raise OSError(f"Wordlist '{name}' does not exist at location '{path}'.")
-        return
-    return path
+    # all in all we dont need file paths anymore at this stage
+    return name # needs rework. not too sure yet what the function is exactly supposed to do
 
 
 def prefix(pre, xs):
@@ -242,14 +233,13 @@ def find_parts_of_speech(name):
 def getallcategories(d=''):
     '''Get all categories (subdirectories) from a word class (adjectives,
     nouns, etc.)'''
-    d = os.path.join(WORD_PATH, d)
-    path_to_all_categories = [
-        os.path.relpath(os.path.splitext(f)[0], d)
-        for f in glob.glob(os.path.join(d, '**/*.txt'), recursive=True)]
-
-    # Replace OS-dependent separator with '/' which aligns with the input format
-    # of the users.
-    return [p.replace(os.sep, "/") for p in path_to_all_categories]
+    all_categories = []
+    for key in wordlists.wordlists:
+        tokens = key.split('/')
+        word_class = tokens[0]
+        if word_class.startswith(d):
+            all_categories.append(key)
+    return all_categories
 
 
 # get all available word classes and categories.
