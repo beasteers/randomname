@@ -237,8 +237,11 @@ def getallcategories(d=''):
     for key in wordlists.wordlists:
         tokens = key.split('/')
         word_class = tokens[0]
-        if word_class.startswith(d):
+        category = tokens[1]
+        if d == '':
             all_categories.append(key)
+        elif word_class == d:
+            all_categories.append(category)
     return all_categories
 
 
