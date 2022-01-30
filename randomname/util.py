@@ -3,10 +3,8 @@ get_groups_list
     resolve_fname
         load
             load_wordlist
-                as_valid_path
             get_matched_categories
                 close_matches
-                    as_valid_path
 getallcategories
 
 '''
@@ -114,11 +112,11 @@ def close_matches(name, cutoff=0.65):
         # they spelled the first part correctly
         if part0 in WORD_CLASSES:
             _ms = _get_matches(part1, AVAILABLE[part0], cutoff=cutoff)
-            matches += [f for f in ('{}/{}'.format(part0, m) for m in _ms) if as_valid_path(f)]
+            matches += [f for f in ('{}/{}'.format(part0, m) for m in _ms)]
         # they entered a misspelled category
         elif part1 in all_sub_categories:
             _ms = _get_matches(part0, [k for k in AVAILABLE if part1 in AVAILABLE[k]], cutoff=cutoff)
-            matches += [f for f in ('{}/{}'.format(m, part1) for m in _ms) if as_valid_path(f)]
+            matches += [f for f in ('{}/{}'.format(m, part1) for m in _ms)]
         # they entered a misspelled category and misspelled group
         else:
             matches += _get_matches(name, ALL_CATEGORIES, cutoff=cutoff)
@@ -182,10 +180,6 @@ def doalias(fname):
         parts = [v if x == k else x for x in parts]
     return '/'.join(parts)
 
-
-def as_valid_path(name, required=False):
-    # all in all we dont need file paths anymore at this stage
-    return name # needs rework. not too sure yet what the function is exactly supposed to do
 
 
 def prefix(pre, xs):

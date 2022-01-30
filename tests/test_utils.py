@@ -11,12 +11,6 @@ def test_doalias():
 opj = os.path.join
 PATH = os.path.abspath(os.path.join(__file__, '..', '..', 'randomname', 'wordlists')).lower()
 
-def test_valid_path():
-    path = opj(PATH, 'nouns', 'food') + '.txt'
-    assert randomname.util.as_valid_path('../../../nouns/food').lower() == path
-    assert randomname.util.as_valid_path('nouns/food').lower() == path
-    #assert randomname.util.as_valid_path(r'nouns\food').lower() == path
-
 
 def test_prefix():
     assert randomname.util.prefix('hi', ['a', 'b']) == ['hi/a', 'hi/b']
