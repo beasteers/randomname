@@ -46,7 +46,7 @@ WORD_FUNCS = {
 
 
 def run_with_set_random_seed(method):
-    '''Set Python pseudo-random number generator seed to ensure reproducibility, run the method, and then reset it to system default. 
+    '''Set Python pseudo-random number generator seed to ensure reproducibility, run the method and then reset the seed to system default. 
         No seed is set if seed=None.'''
     def decorated_method(*args, seed=None, **kwargs):
         random.seed(seed)
