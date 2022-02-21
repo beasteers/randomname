@@ -45,6 +45,27 @@ WORD_FUNCS = {
 }
 
 
+def run_with_set_random_seed(method):
+    '''Set Python pseudo-random number generator seed to ensure reproducibility and then reset it to system default. 
+        No seed is set if seed=None.'''
+    def decorated_method(*args, seed=None, **kwargs):
+        set_seed(seed)
+        result = method(*args, **kwargs)
+        reset_seed()
+        return result
+    return decorated_method
+
+
+def set_seed(seed):
+    '''Set Python pseudo-random number generator seed to ensure reproducibility.'''
+    random.seed(seed)
+    return
+
+def reset_seed():
+    '''Reset Python pseudo-random number generator seed to system default.'''
+    random.seed()
+    return
+
 def get_groups_list(fnames):
     '''Get word lists from multiple word groups.'''
     return [x for f in as_multiple(fnames) for x in resolve_fname(f)]
@@ -231,7 +252,6 @@ def as_multiple(x):
     '''Ensure a list or tuple.'''
     x = x if isinstance(x, (list, tuple)) else [x]
     return [si for s in x for si in ([s] if callable(s) else str(s).split(','))]
-
 
 
 def find_parts_of_speech(name):
