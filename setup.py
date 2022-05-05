@@ -1,4 +1,5 @@
 import setuptools
+from pathlib import Path
 
 USERNAME = 'beasteers'
 NAME = 'randomname'
@@ -13,7 +14,7 @@ setuptools.setup(
     author_email='bea.steers@gmail.com',
     url='https://github.com/{}/{}'.format(USERNAME, NAME),
     packages=setuptools.find_packages(),
-    package_data={NAME: ['wordlists/**/*.txt']},
+    package_data={NAME: [str(path.relative_to(NAME)) for path in Path(f"{NAME}/wordlists").rglob("*.txt")]},
     entry_points={'console_scripts': ['{name}={name}:main'.format(name=NAME)]},
     install_requires=['fire'],
     tests_require=['pytest'],
