@@ -13,7 +13,7 @@ setuptools.setup(
     author_email='bea.steers@gmail.com',
     url='https://github.com/{}/{}'.format(USERNAME, NAME),
     packages=setuptools.find_packages(),
-    package_data={NAME: ['wordlists/**/*.txt']},
+    package_data={NAME: ['words/**/*']},
     entry_points={'console_scripts': ['{name}={name}:main'.format(name=NAME)]},
     install_requires=['fire'],
     license='MIT License',
