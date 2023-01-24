@@ -44,6 +44,21 @@ WORD_FUNCS = {
     'uuid': uuid_,
 }
 
+# randomname owns its own rng
+rng = random.Random()
+rng.seed()
+
+def run_with_set_random_seed(method):
+    '''Set randomname (pseudo-)random number generator seed to ensure reproducibility 
+        before executing the method. 
+        Does nothing if seed=None.'''
+    def decorated_method(*args, seed=None, **kwargs):
+        if seed is not None:
+            rng.seed(seed)
+        result = method(*args, **kwargs)
+        return result
+    return decorated_method
+
 
 def get_groups_list(fnames):
     '''Get word lists from multiple word groups.'''
@@ -205,7 +220,7 @@ def prefix(pre, xs):
 def choose(items, n=None):
     '''Choose one item from a list.'''
     items = as_multiple(items)
-    x = random.choice(items) if n is None else random.choices(items, k=n)
+    x = rng.choice(items) if n is None else rng.choices(items, k=n)
 
     if isinstance(x, list):
         x = [xi() if callable(xi) else xi for xi in x]
@@ -231,7 +246,6 @@ def as_multiple(x):
     '''Ensure a list or tuple.'''
     x = x if isinstance(x, (list, tuple)) else [x]
     return [si for s in x for si in ([s] if callable(s) else str(s).split(','))]
-
 
 
 def find_parts_of_speech(name):
