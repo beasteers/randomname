@@ -1,0 +1,13 @@
+clock
+fan
+grill
+hood
+iron
+light
+radio
+range
+scale
+stove
+telephone
+torch
+watch

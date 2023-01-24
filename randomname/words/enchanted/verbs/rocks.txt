@@ -1,0 +1,11 @@
+coal
+gravel
+jade
+jet
+pumice
+rock
+salt
+sand
+silt
+stone
+talc

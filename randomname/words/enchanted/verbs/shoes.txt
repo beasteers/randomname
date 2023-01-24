@@ -1,0 +1,10 @@
+boots
+cleats
+clogs
+flipflops
+heels
+pumps
+rollerblades
+shoes
+skates
+slides

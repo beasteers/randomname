@@ -1,0 +1,12 @@
+adhesive
+domestic
+express
+fast
+foreign
+forward
+international
+open
+overnight
+overseas
+periodical
+unopened

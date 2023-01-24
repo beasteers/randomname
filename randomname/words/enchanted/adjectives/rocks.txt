@@ -1,0 +1,15 @@
+amber
+amethyst
+coral
+fossil
+gold
+jade
+jet
+lapidary
+mineral
+ruby
+salt
+sapphire
+serpentine
+stone
+vitreous

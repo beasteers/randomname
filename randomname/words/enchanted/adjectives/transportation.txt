@@ -1,0 +1,11 @@
+buggy
+convertible
+dirigible
+hybrid
+jet
+locomotive
+motor
+plane
+satellite
+submarine
+submersible

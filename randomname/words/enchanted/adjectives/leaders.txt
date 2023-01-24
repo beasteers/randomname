@@ -1,0 +1,12 @@
+boss
+chief
+elder
+executive
+general
+master
+noble
+premier
+principal
+regent
+representative
+sovereign

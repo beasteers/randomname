@@ -1,0 +1,12 @@
+barb
+carp
+cod
+fish
+flounder
+perch
+ray
+shark
+skate
+smelt
+sole
+whiting

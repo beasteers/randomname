@@ -1,0 +1,16 @@
+blue
+eagle
+field
+flag
+flutter
+fly
+hoist
+lower
+pole
+raise
+salute
+star
+stripe
+unfurl
+wave
+white

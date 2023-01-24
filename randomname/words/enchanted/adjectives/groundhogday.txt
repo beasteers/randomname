@@ -1,0 +1,14 @@
+chilly
+cloudy
+cold
+mild
+ominous
+second
+sign
+signal
+stormy
+sunny
+underground
+warm
+warning
+weather

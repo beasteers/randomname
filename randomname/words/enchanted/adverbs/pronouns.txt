@@ -1,0 +1,10 @@
+all
+any
+each
+either
+more
+most
+much
+none
+nothing
+some

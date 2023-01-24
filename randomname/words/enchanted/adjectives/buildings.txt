@@ -1,0 +1,11 @@
+arch
+cathedral
+compound
+duplex
+greenhouse
+highrise
+home
+shed
+stable
+terminal
+triplex

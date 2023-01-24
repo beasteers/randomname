@@ -1,0 +1,14 @@
+abstract
+artistic
+charcoal
+color
+decorative
+medium
+mobile
+model
+mosaic
+mural
+pastel
+solvent
+stone
+visual

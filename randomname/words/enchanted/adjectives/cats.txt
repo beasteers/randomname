@@ -1,0 +1,14 @@
+burmese
+himalayan
+javanese
+manx
+oriental
+persian
+siamese
+somali
+bobtail
+calico
+feline
+ginger
+tabby
+wildcat

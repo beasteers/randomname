@@ -1,0 +1,13 @@
+banquette
+bench
+chair
+chaise
+couch
+futon
+loveseat
+ottoman
+pouf
+sectional
+settee
+sofa
+stool

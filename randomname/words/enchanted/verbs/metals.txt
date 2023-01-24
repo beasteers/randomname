@@ -1,0 +1,11 @@
+alloy
+bronze
+chrome
+copper
+iron
+lead
+metal
+silver
+steel
+tin
+zinc

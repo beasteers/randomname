@@ -1,0 +1,10 @@
+crescent
+cuboid
+ellipsoid
+oval
+plane
+quadrilateral
+round
+shapeless
+square
+star

@@ -1,0 +1,11 @@
+bridge
+causeway
+circle
+drive
+interchange
+pass
+place
+route
+span
+trail
+walk

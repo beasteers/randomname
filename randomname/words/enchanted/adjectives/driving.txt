@@ -1,0 +1,14 @@
+fast
+go
+hybrid
+lowbeam
+motor
+oneway
+pass
+pedal
+pedestrian
+reverse
+roundabout
+sign
+slow
+warning

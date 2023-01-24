@@ -1,0 +1,12 @@
+earth
+border
+chart
+key
+land
+map
+parallel
+peak
+pole
+rose
+scale
+title

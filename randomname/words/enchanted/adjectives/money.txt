@@ -1,0 +1,11 @@
+bankrupt
+capital
+cheap
+collateral
+compound
+expensive
+poor
+rich
+sold
+surplus
+thrifty

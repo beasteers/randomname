@@ -1,0 +1,17 @@
+base
+champion
+curling
+equestrian
+forward
+game
+go
+home
+mat
+net
+out
+running
+swimming
+uniform
+vaulting
+walking
+winning

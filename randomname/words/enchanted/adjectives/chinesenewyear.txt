@@ -1,0 +1,11 @@
+chinese
+clean
+gold
+golden
+jade
+lucky
+lunar
+prosperous
+red
+ritual
+traditional

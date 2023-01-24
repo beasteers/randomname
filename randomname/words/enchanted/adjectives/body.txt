@@ -1,0 +1,14 @@
+arch
+back
+bone
+capillary
+carpal
+hip
+liver
+metacarpal
+metatarsal
+molar
+pituitary
+sole
+tarsal
+thyroid

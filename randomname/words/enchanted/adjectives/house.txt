@@ -1,0 +1,13 @@
+attic
+concrete
+counter
+downstairs
+dryer
+greenhouse
+home
+key
+light
+mat
+shed
+trim
+upstairs

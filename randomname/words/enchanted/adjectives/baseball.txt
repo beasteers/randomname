@@ -1,0 +1,11 @@
+base
+champion
+first
+foul
+game
+home
+nine
+out
+second
+third
+uniform

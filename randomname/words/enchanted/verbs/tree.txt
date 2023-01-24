@@ -1,0 +1,14 @@
+ash
+bark
+birch
+cone
+date
+forest
+gum
+haw
+palm
+peach
+pine
+rings
+spruce
+tree
