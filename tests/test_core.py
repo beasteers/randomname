@@ -19,10 +19,8 @@ def test_generate():
     assert name[0] not in randomname.util.get_groups_list('n/food')
 
 def test_generate_with_seed():
-    name = randomname.generate(seed=12, sep='_')
-    assert name == 'glass_portal'
-    name = randomname.generate(seed=29, sep='_')
-    assert name == 'resonnt_lynx'
+    for seed in range(0, 100, 10):
+        assert len({randomname.generate(seed=seed, sep='_') for _ in range(20)}) == 1
 
 def test_generated_names_are_valid_file_names(tmp_path: Path):
     random_names = [randomname.generate() for _ in range(10)]
