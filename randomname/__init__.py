@@ -1,12 +1,41 @@
 import os
+import random
+
+rng = random.Random()
+
+PATH = os.path.dirname(__file__)
+WORD_PATH = os.path.join(PATH, 'words')
+BUILTIN_WORD_LISTS = os.listdir(WORD_PATH)
+
+DEFAULT_WORDLIST = os.getenv("RANDOMNAME_WORDLIST") or 'imsky'
+GLOBAL_BLACKLIST = os.getenv("RANDOMNAME_GLOBAL_WORDLIST") or '~/.randomname/blacklist'
+LOCAL_BLACKLIST = os.getenv("RANDOMNAME_LOCAL_WORDLIST") or '.randomname.blacklist'
+
+
 import functools
 from .lists import *
 from . import util
 
 
-DEFAULT_WORDLIST = os.getenv("RANDOMNAME_WORDLIST") or 'imsky'
-GLOBAL_BLACKLIST = os.getenv("RANDOMNAME_GLOBAL_WORDLIST") or '~/.randomname/blacklist'
-LOCAL_BLACKLIST = os.getenv("RANDOMNAME_LOCAL_WORDLIST") or '.randomname.blacklist'
+aliases = util.Aliases({
+    'a': 'adjectives',
+    'n': 'nouns',
+    'v': 'verbs',
+    'nm': 'names',
+    'ip': 'ipsum',
+    # longer, clearer abbreviations
+    'adj': 'adjectives',
+    'nn': 'nouns',
+    'vb': 'verbs',
+    'u': 'uuid',
+    'uu': 'uuid',
+    # full singular
+    'adjective': 'adjectives',
+    'noun': 'nouns',
+    'verb': 'verbs',
+    'name': 'names',
+})
+
 
 
 WORDLISTS = {}
@@ -46,8 +75,9 @@ def get_blacklist(*blacklists):
 
 
 # define the wordlist
-wordlists = get_wordlist(DEFAULT_WORDLIST)
+# wordlists = get_wordlist(DEFAULT_WORDLIST)
 
+wordlists = WORDLISTS['all'] = WordLists([get_wordlist(k) for k in BUILTIN_WORD_LISTS])
 
 # import uuid as _uuid
 # def uuid(n=None):
@@ -103,9 +133,6 @@ def sample_word(*groups, n=None, list=None):
         words = randomname.sample_word('n/chemistry', 'n/cheese', n=5)
         assert len(words) == 5
     '''
-    # l = wordlists.filter_lists(*groups, accept_literals=True)
-    # print(l, len(l), l[0])
-    # print(len(l.lists[1]), list(l.lists[1]))
     return get_wordlist(list).filter_lists(*groups, accept_literals=True).sample(n)
 
 
@@ -189,6 +216,7 @@ def main():
         'sample_word': sample_word, 'sample_names': sample_names,
         'sample_words': lambda *a, n=10, **kw: sample_word(*a, n=n, **kw),
         'search': _prints(search),
+        'wordlists': wordlists,
     })
 
 

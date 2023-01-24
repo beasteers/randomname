@@ -130,22 +130,22 @@ def test_wordlist_filter():
 
 def test_wordlist_match():
     wl = rn.WordList(['a', 'b', 'c'], 'nouns/asdf')
-    assert wl.match('nouns')
-    assert wl.match('nouns/')
-    assert wl.match('nouns/*')
-    assert wl.match('nouns/asdf')
+    assert wl.match_wordlist_name('nouns')
+    assert wl.match_wordlist_name('nouns/')
+    assert wl.match_wordlist_name('nouns/*')
+    assert wl.match_wordlist_name('nouns/asdf')
 
-    assert not wl.match('anouns')
-    assert not wl.match('anouns/')
-    assert not wl.match('anouns/*')
-    assert not wl.match('anouns/asdf')
-    assert not wl.match('nouns/asdfaaa')
+    assert not wl.match_wordlist_name('anouns')
+    assert not wl.match_wordlist_name('anouns/')
+    assert not wl.match_wordlist_name('anouns/*')
+    assert not wl.match_wordlist_name('anouns/asdf')
+    assert not wl.match_wordlist_name('nouns/asdfaaa')
 
     wl = rn.WordList(['a', 'b', 'c'], 'nouns/asdf', exact_match=True)
-    assert not wl.match('nouns')
-    assert not wl.match('nouns/')
-    assert not wl.match('nouns/*')
-    assert wl.match('nouns/asdf')
+    assert not wl.match_wordlist_name('nouns')
+    assert not wl.match_wordlist_name('nouns/')
+    assert not wl.match_wordlist_name('nouns/*')
+    assert wl.match_wordlist_name('nouns/asdf')
 
 
 def test_wordlist_file():  # dump, lazy load

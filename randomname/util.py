@@ -2,19 +2,20 @@
 '''
 import os
 import glob
-import random
+from randomname import rng
 
 
 class Aliases(dict):
+    '''Manage string aliases'''
     def __init__(self, aliases=None):
         super().__init__(aliases or {})
 
-    def __call__(self, name):
+    def __call__(self, name, char='/'):
         '''Replace aliases in string.'''
-        parts = name.split('/')
+        parts = name.split(char)
         for k, v in self.items():
             parts = [v if x == k else x for x in parts]
-        return '/'.join(parts)
+        return char.join(parts)
 
     def update(self, aliases, force=False):
         if not force:
@@ -33,6 +34,7 @@ class Aliases(dict):
 
 
 def join_path(*xs, char='/'):
+    '''like os.path.join, but doesn't change if you're on windows.'''
     return char.join(x.strip(char) for x in xs if x)
 
 
@@ -44,14 +46,15 @@ def prefix(pre, xs):
     '''Prefix all items with a path prefix.'''
     return [join_path(pre, x.lstrip('/')) for x in as_multiple(xs)]
 
-def remove_prefix(x, prefix=''):
-    return x[len(prefix):] if x.startswith(prefix) else x
+def remove_prefix(x, prefix=None):
+    '''Remove a prefix from a string if it exists.'''
+    return x[len(prefix):] if prefix and x.startswith(prefix) else x
 
 
 def choose(items, n=None):
     '''Choose one item from a list.'''
     items = as_multiple(items)
-    return random.choice(items) if n is None else random.choices(items, k=n)
+    return rng.choice(items) if n is None else rng.choices(items, k=n)
 
 
 def sample_unique(func, n, *a, n_fails=50, unique=True, **kw):
@@ -84,8 +87,6 @@ def recursive_files(d='', ext='.txt'):
 
 import importlib.resources
 
-# def package_ls():
-
 
 def recursive_package_files(module, path, ext='.txt'):
     ext = as_list(ext)
@@ -98,12 +99,6 @@ def recursive_package_files(module, path, ext='.txt'):
         for fi in f.iterdir():
             paths[os.path.relpath(os.path.splitext(f)[0], d)] = fi
     return module, paths
-
-
-
-
-def open_pkgdata(module, path):
-    pass
 
 
 # CLI parsing

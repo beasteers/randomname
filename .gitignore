@@ -11,6 +11,12 @@ __pycache__/
 shh/
 shhh/
 shhhh/
+.shh/
+.shhh/
+.shhhh/
+
+word_dumps/
+.too_small/
 
 # C extensions
 *.so
