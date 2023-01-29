@@ -11,7 +11,7 @@ def _sanitize(word):
     return INVALID_PATTERN.sub('', word.split('(')[0]).lower()
 
 def sanitize(root, dry_run=False):
-    for f in glob.glob(os.path.join(root, '**/*.txt'), recursive=True):
+    for f in glob.glob(os.path.join(root, '**/*.txt'), recursive=True) or glob.glob(f'{root}.txt'):
         wl = randomname.WordListFile(f)
         wl2 = randomname.WordList(randomname.util.unique([_sanitize(w) for w in wl]))
         diff = {w1: w2 for w1, w2 in zip(wl, wl2) if w1 != w2}

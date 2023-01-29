@@ -36,7 +36,7 @@ def test_as_wordlist():
     with pytest.raises(OSError):
         wl = rn.WordList.as_wordlist('ahkjhaskdjfbaskjfb')
     with pytest.raises(OSError):
-        wl = rn.WordList._from_directory(os.path.join(rn.WORD_PATH, 'ahkjhaskdjfbaskjfb'))  # for coverage
+        wl = rn.WordList._from_directory('ahkjhaskdjfbaskjfb')  # for coverage
 
     # as_wordlist( dictionary )
     d = {
@@ -53,22 +53,29 @@ def test_as_wordlist():
     with pytest.raises(ValueError):
         rn.WordList.as_wordlist(5)
 
+    # assert rn.
+
     
 
 
 def test_wordlist_misc():
     wl = rn.WordList.as_wordlist(['a', 'b'], 'abc')
-    assert wl.name in str(wl)
-    assert wl.name in repr(wl)
+    assert wl.name and wl.name in str(wl)
+    assert wl.name and wl.name in repr(wl)
     # D = {wl.name: 'hello', wl: 'hi'}
     # print(D)
     # assert len(D) == 1
     # assert D[wl.name] == 'hello'
 
     # as_wordlist( directory )
-    wl2 = wl.copy('qqqqqqq')
+    wl2 = wl.copy(name='qqqqqqq')
     assert list(wl) == list(wl2)
     assert wl.name != wl2.name
+
+    assert hash(wl) == hash(wl.name)
+    assert list(wl.copy(['a','b','c'])) == ['a','b','c']
+
+    
 
 
 def test_wordlist_math():
@@ -104,18 +111,19 @@ def test_wordlist_math():
 
 def test_wordlist_search():
     wl = rn.WordList(['asdf', 'asxc', 'zxcv'], 'a')
-    assert wl.search('as') == []
-    assert wl.search('as*') == ['asdf', 'asxc']
-    assert wl.search('asd*') == ['asdf']
-    assert wl.search('asdf') == ['asdf']
+    assert wl.find('as') == []
+    assert wl.find('as*') == ['asdf', 'asxc']
+    assert wl.find('asd*') == ['asdf']
+    assert wl.find('asdf') == ['asdf']
+    assert wl.find(lambda w: w[::-1]=='fdsa') == ['asdf']
 
+    assert list(wl.filter('as*')) == ['asdf', 'asxc']
 
 def test_wordlist_sample():
     xs = [f'a{i}' for i in range(200)]
     wl = rn.WordList(xs, 'a')
     for _ in range(200):
         assert wl.sample() in xs
-        assert wl() in xs
     assert len(wl.sample(40)) == 40
 
 
@@ -130,22 +138,25 @@ def test_wordlist_filter():
 
 def test_wordlist_match():
     wl = rn.WordList(['a', 'b', 'c'], 'nouns/asdf')
-    assert wl.match_wordlist_name('nouns')
-    assert wl.match_wordlist_name('nouns/')
-    assert wl.match_wordlist_name('nouns/*')
-    assert wl.match_wordlist_name('nouns/asdf')
+    assert wl._get_matches('nouns')
+    assert wl._get_matches('nouns/')
+    assert wl._get_matches('nouns/*')
+    assert wl._get_matches('nouns/asdf')
 
-    assert not wl.match_wordlist_name('anouns')
-    assert not wl.match_wordlist_name('anouns/')
-    assert not wl.match_wordlist_name('anouns/*')
-    assert not wl.match_wordlist_name('anouns/asdf')
-    assert not wl.match_wordlist_name('nouns/asdfaaa')
+    assert not wl._get_matches('anouns')
+    assert not wl._get_matches('anouns/')
+    assert not wl._get_matches('anouns/*')
+    assert not wl._get_matches('anouns/asdf')
+    assert not wl._get_matches('nouns/asdfaaa')
 
     wl = rn.WordList(['a', 'b', 'c'], 'nouns/asdf', exact_match=True)
-    assert not wl.match_wordlist_name('nouns')
-    assert not wl.match_wordlist_name('nouns/')
-    assert not wl.match_wordlist_name('nouns/*')
-    assert wl.match_wordlist_name('nouns/asdf')
+    assert not wl._get_matches('nouns')
+    assert not wl._get_matches('nouns/')
+    assert not wl._get_matches('nouns/*')
+    assert wl._get_matches('nouns/asdf')
+
+    assert not rn.WordList([])._matches_name(None)
+    assert rn.WordList([], 'asdf/qwer/zxcv')._matches_name('qwer')
 
 
 def test_wordlist_file():  # dump, lazy load
@@ -184,23 +195,37 @@ def test_wordlist_file():  # dump, lazy load
         # assert wlf.filter()
         # assert list.__len__(wlf) == len(wl)
 
-        assert wlf.name in repr(wlf)
+        assert wlf.name and wlf.name in repr(wlf)
         
     finally:
         if os.path.isfile(path): os.remove(path)
 
+    with pytest.raises(OSError):
+        rn.WordListFile("asdfasdfasdfasdfasdf")
+
+    wl = rn.WordList.as_wordlist(os.path.join(rn.WORD_PATH, 'pokemon'))
+    assert wl.name == 'pokemon'
+    assert isinstance(wl, rn.WordLists)
+    assert all([isinstance(l, rn.WordListFile) for l in wl.lists])
+
+    with pytest.raises(OSError):
+        rn.WordList._from_package_dir(rn.BUILTIN_LIST_LOCATION/'asdfasdfxx')
+
 
 def test_wordlist_function():
     import random
-    def rand(max=1): return random.random()*1
+    def rand(max=1): return random.random()*max
     wl = rn.WordListFunction(rand)
     assert all(0 <= int(i) <= 1 for i in wl.sample(200))
     assert list(wl) == []
-    assert wl.match('rand')
-    assert wl.match('rand/2')
-    assert not wl.match('random')
+    assert wl._get_matches('rand') and wl._matches_name('rand')
+    assert wl._get_matches('rand(2)') and wl._matches_name('rand(2)')
+    assert not wl._get_matches('random') and not wl._matches_name('random')
     # assert any(1 <= int(i) <= 2 for i in wl.sample(200))
+    assert len(wl) == 0
 
+    wl = rn.WordListFunction(rand, length=20)
+    assert len(wl) == 20
     xs = [set(wl[i] for _ in range(10)) for i in range(10)]
     assert all(len(x) == 1 for x in xs)
     for w, x in zip(wl, xs):
@@ -214,33 +239,40 @@ def test_wordlist_function():
 
 def test_wordlists():
     wl = rn.WordList.as_wordlist('imsky')
-    for l in wl.lists:
-        assert os.path.isfile(os.path.join(
-            rn.WORD_PATH, f'{l.name}.txt'))
+    # for l in wl.lists:
+    #     assert os.path.isfile(os.path.join(
+    #         rn.WORD_PATH, f'{l.name}.txt'))
 
-    assert wl.name in repr(wl)
+    assert wl.name and wl.name in repr(wl)
 
     # add
     wl = rn.WordLists()
     wli = rn.WordList.as_wordlist(['a', 'b'], 'aaa')
     wl.add(wli)
-    wl.add(rn.WordList.as_wordlist(['c', 'd'], 'aaa'))
+    wl.add(rn.WordList.as_wordlist(['c', 'd'], 'aaa'), conflict='merge')
     wl.add(rn.WordList.as_wordlist(['x', 'y'], 'bbb'))
     assert len(wl) == 6
     assert list(wl) == ['a', 'b', 'c', 'd', 'x', 'y']
 
     # 
-    assert list(wl.filter_lists('aaa')) == ['a', 'b', 'c', 'd']
+    assert list(wl.subset('aaa')) == ['a', 'b', 'c', 'd']
     assert 'd' in wl
 
     # __getitem__
     assert list(wl['aaa']) == ['a', 'b', 'c', 'd']
     with pytest.raises(IndexError):
         rn.WordLists()[0]
-    with pytest.raises(IndexError):
-        rn.WordLists()[:]
+    # with pytest.raises(IndexError):
+    #     rn.WordLists()[:]
     with pytest.raises(IndexError):
         rn.WordLists()[None]
+
+    wlcp = wl[:]
+    assert isinstance(wlcp, rn.WordLists)
+    assert wlcp.name == wl.name
+    assert len(wlcp.lists) == len(wl.lists)
+    assert [l.name for l in wlcp.lists] == [l.name for l in wl.lists]
+    
     assert list(wl[2:3]) == ['c']
     assert list(wl[2:5]) == ['c', 'd', 'x']
     assert list(wl[2:]) == ['c', 'd', 'x', 'y']
@@ -255,31 +287,55 @@ def test_wordlists():
     wl = wl.filter(lambda w: w != 'a')
     assert 'a' not in set(wl.sample(100))
 
-    # filter_lists
-    assert wl.filter_lists() is wl
-    # for l, l2 in zip(wl.filter_lists('aaa/').lists, wl.lists):
+    # subset
+    assert wl.subset() is wl
+    # for l, l2 in zip(wl.subset('aaa/').lists, wl.lists):
     #     print(l)
     #     print(l2)
-    # assert wl.filter_lists('aaa/').lists == [wl.lists[:2]]
+    # assert wl.subset('aaa/').lists == [wl.lists[:2]]
     with pytest.raises(ValueError):
-        assert wl.filter_lists('aaax/')
+        assert wl.subset('aaax/')
 
-    # test filter_lists with word literals
-    ls = wl.filter_lists('aaa/', 'xx,yy', accept_literals=True).lists
+    # test subset with word literals
+    ls = wl.subset('aaa/', 'xx,yy', accept_literals=True).lists
     print(ls)
     assert ls[0].name == 'aaa'
-    assert ls[1].name == 'aaa'
+    # assert ls[1].name == 'aaa'
     assert list(ls[-1]) == ['xx', 'yy']
 
-    sub = wl.filter_lists('aaa')
+    sub = wl.subset('aaa')
     n = len(wl)
     nsub = len(sub)
     wl -= sub
     assert len(wl) == n - nsub
 
-    wls = rn.WordLists([
 
-    ])
+def test_wordlists_add():
+    aaa=rn.WordList.as_wordlist(['a', 'b'], 'aaa')
+    ccc=rn.WordList.as_wordlist(['c', 'd'], 'ccc')
+    wl = rn.WordLists()
+    wl.add(aaa)
+    wl.add(aaa)
+    with pytest.raises(ValueError):
+        wl.add(aaa, conflict='error')
+    wl.extend([aaa, ccc], conflict='merge')
+    pass # add conflict, extend
+
+
+def test_wordlists_getitem():
+    aaa=rn.WordList.as_wordlist(['a', 'b'], 'aaa')
+    ccc=rn.WordList.as_wordlist(['c', 'd'], 'ccc')
+    wl = rn.WordLists([aaa, ccc])
+    assert wl[:] is not wl
+    assert list(wl[:]) == list(wl)
+    assert wl['aaa'] is aaa
+    assert wl['ccc'] is ccc
+    with pytest.raises(KeyError):
+        wl['bbb']
+
+    wl = rn.WordLists()
+    assert list(wl[len(wl)+1:]) == []
+    assert list(wl[len(wl)+1:]) == []
 
     
 def test_wordlists_squeeze():
@@ -288,55 +344,46 @@ def test_wordlists_squeeze():
     assert isinstance(wl.squeeze(), rn.WordList)
     wl = rn.WordLists([
         rn.WordList.as_wordlist(['a', 'b'], 'aaa'), 
-        rn.WordList.as_wordlist(['a', 'b'], 'aaay'), 
-        rn.WordList.as_wordlist(['a', 'b'], 'aaaz'), 
-        rn.WordList.as_wordlist(['a', 'b'], 'bbb')])
+        rn.WordList.as_wordlist(['a', 'b'], 'aaay')])
     assert isinstance(wl.squeeze(), rn.WordLists)
 
 
-def test_wordlists_close():
-    # _close_matches
+@pytest.mark.parametrize("q,expected", [
+    ('music', ['xxx/music', 'yyy/musicals', 'musicals/xxx', 'xxx/music_theory']),
+    ('mu', ['xxx/music', 'yyy/musicals', 'xxx/music_theory', 'musicals/xxx']),
+    ('mi', ['xxx/miso', 'xxx/mines', 'xxx/minerals', 'xxx/music']),
+    ('mines', ['xxx/mines', 'xxx/minerals', 'xxx/miso']),
+    ('mu*', ['xxx/music', 'xxx/music_theory', 'yyy/musicals', 'musicals/xxx']),
+    ('xxx/music', ['xxx/music', 'musicals/xxx', 'xxx/music_theory'] ),
+    ('xxx/mu', ['xxx/music', 'musicals/xxx', 'xxx/music_theory', 'xxx/mines', 'xxx/minerals']),
+    ('xxx/mi', ['xxx/miso', 'xxx/mines', 'xxx/minerals', 'xxx/music', 'musicals/xxx']),
+    ('xxx/mines', ['xxx/mines', 'xxx/minerals', 'xxx/miso', 'musicals/xxx']),
+])
+def test_wordlists_close(q,expected):
+    # close_matches
     wl = rn.WordLists([
-        rn.WordList.as_wordlist(['a', 'b'], 'xxx/aaa'),
-        rn.WordList.as_wordlist(['a', 'b'], 'xxx/aaax'),
-        rn.WordList.as_wordlist(['a', 'b'], 'xxx/aaay'),
-        rn.WordList.as_wordlist(['a', 'b'], 'xxx/aaq'),
-        rn.WordList.as_wordlist(['a', 'b'], 'xxx/aqq'),
-        rn.WordList.as_wordlist(['a', 'b'], 'xxx/qqq'),
+        rn.WordList.as_wordlist([], 'xxx/music'),
+        rn.WordList.as_wordlist([], 'xxx/music_theory'),
+        rn.WordList.as_wordlist([], 'yyy/musicals'),
+        rn.WordList.as_wordlist([], 'musicals/xxx'),
+        rn.WordList.as_wordlist([], 'xxx/mines'),
+        rn.WordList.as_wordlist([], 'xxx/minerals'),
+        rn.WordList.as_wordlist([], 'xxx/miso'),
     ])
-    print(wl)
-    ms = wl._close_matches('xxx/aaaa/')
-    assert wl._close_matches('xxx/aaa') == ['xxx/aaa', 'xxx/aaay', 'xxx/aaax']
-    assert wl._close_matches('xxx/aaaa') == ['xxx/aaa', 'xxx/aaay', 'xxx/aaax']
-    assert wl._close_matches('xxx/aaax') == ['xxx/aaax', 'xxx/aaa', 'xxx/aaay']
-    assert wl._close_matches('xxx/aaqqqq') == ['xxx/qqq', 'xxx/aqq', 'xxx/aaq']
-    assert wl._close_matches('xxy/aaax') == ['xxx/aaax']
-    assert wl._close_matches('xxy/aaaa') == ['xxx/aaa', 'xxx/aaay', 'xxx/aaax']
-    assert wl._close_matches('aaa') == ['xxx/aaa', 'xxx/aaay', 'xxx/aaax']
+    assert wl.close_matches(q) == expected
 
-    with pytest.raises(ValueError):
-        assert wl.filter_lists('xxx/aaaa')
-
-    # wl2 = rn.WordLists([l.copy(l.name.split('/')[-1]) for l in wl.lists])
-    # assert wl2._close_matches('aaa') == ['aaa', 'aaay', 'aaax']
-    # assert wl2._close_matches('aaaa') == ['aaa', 'aaay', 'aaax']
-    # assert wl2._close_matches('aaax') == ['aaax', 'aaa', 'aaay']
-    # assert wl2._close_matches('aaqqqq') == ['qqq', 'aqq', 'aaq']
+# def test_wordlists_math():
+#     pass
 
 
+# def test_wordlists_sample():
+#     pass
 
-def test_wordlists_math():
-    pass
+# def test_wordlists_filter():
+#     pass
 
+# def test_wordlists_subset():
+#     pass
 
-def test_wordlists_sample():
-    pass
-
-def test_wordlists_filter():
-    pass
-
-def test_wordlists_filter_lists():
-    pass
-
-def test_wordlists_close_matches():
-    pass
+# def test_wordlistsclose_matches():
+#     pass

@@ -5,9 +5,9 @@ rng = random.Random()
 
 PATH = os.path.dirname(__file__)
 WORD_PATH = os.path.join(PATH, 'words')
-BUILTIN_WORD_LISTS = os.listdir(WORD_PATH)
+# BUILTIN_WORD_LISTS = os.listdir(WORD_PATH)
 
-DEFAULT_WORDLIST = os.getenv("RANDOMNAME_WORDLIST") or 'imsky'
+DEFAULT_WORDLISTS = (os.getenv("RANDOMNAME_WORDLIST") or 'imsky,enchanted,pokemon').split(',')
 GLOBAL_BLACKLIST = os.getenv("RANDOMNAME_GLOBAL_WORDLIST") or '~/.randomname/blacklist'
 LOCAL_BLACKLIST = os.getenv("RANDOMNAME_LOCAL_WORDLIST") or '.randomname.blacklist'
 
@@ -34,12 +34,15 @@ aliases = util.Aliases({
     'noun': 'nouns',
     'verb': 'verbs',
     'name': 'names',
+
+    'p': 'pokemon',
+    'pk': 'pokemon',
 })
 
 
 
 WORDLISTS = {}
-def get_wordlist(name, **kw):
+def get_wordlist(name=None, **kw) -> WordList:
     '''Gets a wordlist by name. This lets you use word lists like a singleton.
     '''
     if name is None:
@@ -48,7 +51,8 @@ def get_wordlist(name, **kw):
         return name
     if name in WORDLISTS:
         return WORDLISTS[name]
-    WORDLISTS[name] = wl = WordList.as_wordlist(name, **kw)
+    wl = WordList.as_wordlist(name, **kw)
+    WORDLISTS[wl.name or name] = wl
     wl -= get_blacklist()
     return wl
 
@@ -65,7 +69,7 @@ def set_wordlist(name):
         wordlists = get_wordlist(name)
     return wordlists
 
-def get_blacklist(*blacklists):
+def get_blacklist(*blacklists) -> WordLists:
     '''Get the blacklist wordlist. This can be subtracted from another wordlist.'''
     return WordLists([
         WordListFile(f)
@@ -76,8 +80,10 @@ def get_blacklist(*blacklists):
 
 # define the wordlist
 # wordlists = get_wordlist(DEFAULT_WORDLIST)
-
-wordlists = WORDLISTS['all'] = WordLists([get_wordlist(k) for k in BUILTIN_WORD_LISTS])
+WORDLISTS[None] = WordLists.combine([
+    get_wordlist(k) for k in DEFAULT_WORDLISTS
+])
+wordlists: WordLists = WORDLISTS[None]
 
 # import uuid as _uuid
 # def uuid(n=None):
@@ -90,7 +96,17 @@ wordlists = WORDLISTS['all'] = WordLists([get_wordlist(k) for k in BUILTIN_WORD_
 # sample a single word/phrase
 
 
-def generate(*groups, sep='-', spaces=None, **kw):
+def _sampler(*categories, n, list=None, **kw):
+    wl = [
+        get_wordlist(list).subset(c, accept_literals=True)
+        for c in categories]
+    return util.sample_unique(_sample_sentence, n, wl, **kw)
+
+def _sample_sentence(wordlists, **kw):
+    return util.join_words((w.sample() for w in wordlists), **kw)
+
+
+def generate(*groups, n=None, sep='-', spaces=None, **kw):
     '''Generate words from a sequence of word class/categories.
     
     .. code-block:: python
@@ -105,11 +121,12 @@ def generate(*groups, sep='-', spaces=None, **kw):
         phrase = randomname.generate('underwater,land-bound', 'n/cats', 'cat', 'loves', 'a/', 'n/')
 
     '''
-    return util.join_words((
-        sample_word(x, **kw) for x in groups or ('adj/', 'n/')
-    ), sep=sep, spaces=spaces).lower()
+    return _sampler(*(groups or ('adj/', 'n/')), n=n, sep=sep, spaces=spaces, **kw)
+    # return util.join_words((
+    #     sample_word(x, **kw) for x in groups or ('adj/', 'n/')
+    # ), sep=sep, spaces=spaces).lower()
 
-def get(adj='*', noun='*', sep='-', **kw):
+def get(adj='*', noun='*', sep='-', n=None, **kw):
     '''Get a random adjective-noun using the categories in `adj` and `noun`.
     
     .. code-block:: python
@@ -120,72 +137,78 @@ def get(adj='*', noun='*', sep='-', **kw):
         # sample from specific adjectives/nouns
         phrase = randomname.get('colors', 'cats')
     '''
-    return generate(util.prefix('a', adj), util.prefix('n', noun), sep=sep, **kw)
+    return _sampler(
+        util.prefix('a', adj), util.prefix('n', noun), 
+        n=n, sep=sep, **kw)
+    # return generate(util.prefix('a', adj), util.prefix('n', noun), sep=sep, **kw)
 
-def sample_word(*groups, n=None, list=None):
-    '''Get a random word from a subset of the categories.
+# def sample_word(*groups, n=None, list=None):
+#     '''Get a random word from a subset of the categories.
     
-    .. code-block:: python
+#     .. code-block:: python
 
-        # sample a word from either n/chemistry or n/cheese
-        word = randomname.sample_word('n/chemistry', 'n/cheese')
-        assert isinstance(word, str)
-        words = randomname.sample_word('n/chemistry', 'n/cheese', n=5)
-        assert len(words) == 5
-    '''
-    return get_wordlist(list).filter_lists(*groups, accept_literals=True).sample(n)
+#         # sample a word from either n/chemistry or n/cheese
+#         word = randomname.sample_word('n/chemistry', 'n/cheese')
+#         assert isinstance(word, str)
+#         words = randomname.sample_word('n/chemistry', 'n/cheese', n=5)
+#         assert len(words) == 5
+#     '''
+#     return get_wordlist(list).subset(*groups, accept_literals=True).sample(n)
 
 
+gen = generate
 get_name = get
 
 
-# sample multiple words/phrases
+# # sample multiple words/phrases
 
 
-def sample(*groups, n=10, sep='-', **kw):
-    '''Get a random phrase using categories you provide.
+# def sample(*groups, n=10, **kw):
+#     '''Get a random phrase using categories you provide.
     
-    .. code-block:: python
+#     .. code-block:: python
 
-        randomname.sample('a/colors', 'n/cats', 'v/music')
-        # champagne-siamese-compose
-        # green-javanese-listen
-        # tan-longhair-carol
-        # corn-longhair-vocalize
-        # rust-himalayan-vocalize
-        # plum-marmalade-tune
-        # bordeaux-javanese-improvise
-        # denim-burmese-fiddle
-        # ash-javanese-compose
-        # cream-marmalade-yodel
-    '''
-    return util.sample_unique(generate, n, *groups, sep=sep, **kw)
+#         randomname.sample('a/colors', 'n/cats', 'v/music')
+#         # champagne-siamese-compose
+#         # green-javanese-listen
+#         # tan-longhair-carol
+#         # corn-longhair-vocalize
+#         # rust-himalayan-vocalize
+#         # plum-marmalade-tune
+#         # bordeaux-javanese-improvise
+#         # denim-burmese-fiddle
+#         # ash-javanese-compose
+#         # cream-marmalade-yodel
+#     '''
+#     return generate(*groups, n=n, **kw)
+#     # return util.sample_unique(generate, n, *groups, sep=sep, **kw)
 
-def sample_names(n=10, adj='*', noun='*', sep='-'):
-    '''Sample random adjective-nouns using the categories in `adj` and `noun`.
+# def sample_names(n=10, adj='*', noun='*', sep='-'):
+#     '''Sample random adjective-nouns using the categories in `adj` and `noun`.
     
-    .. code-block:: python
+#     .. code-block:: python
 
-        randomname.sample_names(10, 'colors', 'cats')
-        # champagne-siamese-compose
-        # green-javanese-listen
-        # tan-longhair-carol
-        # corn-longhair-vocalize
-        # rust-himalayan-vocalize
-        # plum-marmalade-tune
-        # bordeaux-javanese-improvise
-        # denim-burmese-fiddle
-        # ash-javanese-compose
-        # cream-marmalade-yodel
-    '''
-    return util.sample_unique(get, n, adj, noun, sep=sep)
+#         randomname.sample_names(10, 'colors', 'cats')
+#         # champagne-siamese-compose
+#         # green-javanese-listen
+#         # tan-longhair-carol
+#         # corn-longhair-vocalize
+#         # rust-himalayan-vocalize
+#         # plum-marmalade-tune
+#         # bordeaux-javanese-improvise
+#         # denim-burmese-fiddle
+#         # ash-javanese-compose
+#         # cream-marmalade-yodel
+#     '''
+#     return get(adj, noun, n=n, sep=sep)
+#     # return util.sample_unique(get, n, adj, noun, sep=sep)
 
 
 # Helpers
 
 def available(*ks, list=None):
     '''Show available categories for a word class.'''
-    return get_wordlist(list).filter_lists(*ks)
+    return get_wordlist(list).subset(*ks)
 
 
 def search(term, filter=None, list=None):
@@ -201,7 +224,7 @@ def search(term, filter=None, list=None):
         assert 'park' in matched
         assert all(w.endswith('ark') for w in matched)
     '''
-    return get_wordlist(list).filter_lists(filter or '*').search(term)
+    return get_wordlist(list).subset(filter or '*').find(term)
 
 
 # CLI
@@ -211,10 +234,12 @@ def search(term, filter=None, list=None):
 def main():
     import fire
     fire.Fire({
-        'get': _prints(get_name), 'generate': _prints(generate),
-        'available': available, 'sample': _prints(sample), 'util': util,
-        'sample_word': sample_word, 'sample_names': sample_names,
-        'sample_words': lambda *a, n=10, **kw: sample_word(*a, n=n, **kw),
+        'get': _prints(get_name), 
+        'generate': _prints(generate), 'gen': _prints(generate),
+        'available': available,
+        'util': util,
+        # 'sample_word': sample_word,  'sample': _prints(sample), 'sample_names': sample_names,
+        # 'sample_words': lambda *a, n=10, **kw: sample_word(*a, n=n, **kw),
         'search': _prints(search),
         'wordlists': wordlists,
     })
@@ -234,17 +259,3 @@ def _prints(func):
         else:
             print(x)
     return inner
-
-
-'''
-
-StackOverflow: https://stackoverflow.com/questions/2288953/separate-word-lists-for-nouns-verbs-adjectives-etc
-
-Wordnet Dictionary: https://wordnet.princeton.edu/download/current-version
-
-egrep -o "^[0-9]{8}\s[0-9]{2}\s[a-z]\s[0-9]{2}\s[a-zA-Z]*\s" data.adj | cut -d ' ' -f 5 > conv.data.adj
-egrep -o "^[0-9]{8}\s[0-9]{2}\s[a-z]\s[0-9]{2}\s[a-zA-Z]*\s" data.adv | cut -d ' ' -f 5 > conv.data.adv
-egrep -o "^[0-9]{8}\s[0-9]{2}\s[a-z]\s[0-9]{2}\s[a-zA-Z]*\s" data.noun | cut -d ' ' -f 5 > conv.data.noun
-egrep -o "^[0-9]{8}\s[0-9]{2}\s[a-z]\s[0-9]{2}\s[a-zA-Z]*\s" data.verb | cut -d ' ' -f 5 > conv.data.verb
-
-'''

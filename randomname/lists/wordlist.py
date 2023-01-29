@@ -18,6 +18,7 @@ import fnmatch
 import randomname
 from randomname import rng
 
+from . import imprc, BUILTIN_LIST_LOCATION
 from .. import util
 from ..util import sample_unique, join_path
 
@@ -66,7 +67,7 @@ class WordList(list):
 
     def __sub__(self, other):
         '''Subtract two wordlists, returning a copy.'''
-        wl = copy.copy(self)
+        wl = self.copy()
         wl -= other
         return wl
 
@@ -105,12 +106,19 @@ class WordList(list):
             f.write('\n'.join(self))
         return path
 
-    def copy(self, name=None):
+    def copy(self, values=None, name=None):
         '''Return a copy of the list.'''
         wl = copy.copy(self)
         if name:
             wl.name = name
+        if values is not None:
+            wl[:] = values
         return wl
+
+
+    # ---------------------------------------------------------------------------- #
+    #                                   Sampling                                   #
+    # ---------------------------------------------------------------------------- #
 
     def sample(self, n=None, **kw):
         '''Sample one or more word from the word list.
@@ -138,7 +146,12 @@ class WordList(list):
         '''
         return sample_unique(rng.choice, n, self, **kw)
 
-    def search(self, pattern):
+
+    # ---------------------------------------------------------------------------- #
+    #                                Word operators                                #
+    # ---------------------------------------------------------------------------- #
+
+    def find(self, pattern):
         '''Search for a word in the wordlist.
 
         Arguments:
@@ -152,7 +165,11 @@ class WordList(list):
             for word in wordlist.search("some*"):
                 print(word)
         '''
-        return WordList(w for w in self if fnmatch.fnmatch(w, pattern))
+        if isinstance(pattern, str):
+            name, pattern = pattern, lambda x: fnmatch.fnmatch(x, name)
+        else:
+            name = getattr(pattern, '__name__', None)
+        return WordList((w for w in self if pattern(w)), name=name)
 
     def filter(self, check, *a, **kw):
         '''Filter words from a wordlist using a function that returns a Truethy value 
@@ -166,11 +183,16 @@ class WordList(list):
         '''
         if isinstance(check, str):
             s, check = check, lambda x: fnmatch.fnmatch(x, s)
-        filtered = copy.copy(self)
+        filtered = self.copy()
         filtered[:] = [x for x in filtered if check(x, *a, **kw)]
         return filtered
 
-    def match_wordlist_name(self, pattern, exact=None):
+
+    # ---------------------------------------------------------------------------- #
+    #                         Matching lists based on name                         #
+    # ---------------------------------------------------------------------------- #
+
+    def _get_matches(self, pattern, **kw):
         '''Check if a search pattern matches the name of this wordlist.
         
         This is used internally to ``WordLists`` for filtering down the available word lists.
@@ -183,24 +205,36 @@ class WordList(list):
             if wordlist.match_wordlist_name("nouns/"):
                 print("It's a noun wordlist")
         '''
-        return self.name if self._match_wordlist_name(pattern, exact) else None
+        return [self] if self._matches_name(pattern, **kw) else []
 
-    def _match_wordlist_name(self, pattern, exact=None):
+    def _matches_name(self, pattern, exact=None):
         if not self.name:
             return False
-        if pattern == self.name:
+        if pattern.strip('/') == self.name:
             return True
+        # if it requires an exact match, exit early
         if self.exact_match if exact is None else exact:
             return False
+        # user provided asterisk - verbs/*
         if fnmatch.fnmatch(self.name, pattern.strip('/')):
             return True
+        # check for prefix
         if self.name.startswith(f'{pattern.rstrip("/")}/'):
             return True
+        # check for suffix
         if self.name.endswith(f'/{pattern.lstrip("/")}'):
             return True
+        # check for pattern somewhere in path
         if fnmatch.fnmatch(self.name, f'*/{pattern.strip("/")}/*'):
             return True
         return False
+
+    def _iter_list_names(self):
+        yield self.name
+
+    # ---------------------------------------------------------------------------- #
+    #                              Class Constructors                              #
+    # ---------------------------------------------------------------------------- #
 
     @classmethod
     def as_wordlist(cls, value, name=None, **kw):
@@ -218,26 +252,33 @@ class WordList(list):
         '''
         if isinstance(value, WordList):  # already a wordlist
             return value
-        if callable(value):  # it's a function, draw sample by calling function
+        # wordlist function
+        if callable(value):
             return randomname.WordListFunction(value, name, **kw)
+        # check for builtin list
+        if isinstance(value, str) and not value.startswith(os.sep) or isinstance(value, imprc.resources_abc.Traversable):
+            builtin_path = BUILTIN_LIST_LOCATION / value
+            if builtin_path.is_dir():
+                return cls._from_package_dir(builtin_path, name, **kw)
 
+        # local directory/file
         if isinstance(value, (str, os.PathLike)):
-            if value in randomname.BUILTIN_WORD_LISTS:
-                builtin = os.path.join(randomname.WORD_PATH, value, **kw)
-                if not os.path.isdir(builtin):
-                    raise OSError(f"Builtin wordlist {value} not available.")
-                return cls._from_directory(builtin, name or value, **kw)
-            elif os.path.isdir(value):
-                return cls._from_directory(value, name)
+            if os.path.isdir(value):
+                return cls._from_directory(value, name, **kw)
             elif not os.path.isfile(value):
                 raise OSError(f"File not found: {value}")
             return randomname.WordListFile(value, name, **kw)
 
+        # listeral list
         if isinstance(value, (list, tuple)):
             if all(isinstance(x, str) for x in value):
                 return WordList(value, name, **kw)
+        # dict of word lists
         if isinstance(value, dict):
-            return randomname.WordLists([cls.as_wordlist(l, k) for k, l in value.items()], name)
+            return randomname.WordLists.combine([
+                cls.as_wordlist(l, k) 
+                for k, l in value.items()
+            ], name=name, **kw)
         raise ValueError("Not sure how to convert this to a wordlist: {}".format(value))
 
     @classmethod
@@ -245,11 +286,25 @@ class WordList(list):
         fs = util.recursive_files(path)
         if not fs:
             raise OSError(f"Unable to find wordlist: {path!r}")
-        wl = randomname.WordLists([
-            cls.as_wordlist(p, join_path(name, k))
+        wl = randomname.WordLists.combine([
+            cls.as_wordlist(p, k)#join_path(name, k)
             for k, p in fs.items()
-        ], name or os.path.dirname(path), **kw)
+        ], name=name or os.path.basename(path), **kw)
         wl -= {
             w for p in glob.glob(os.path.join(path, '.blacklist')) 
             for w in cls.as_wordlist(p)}
+        return wl
+
+    @classmethod
+    def _from_package_dir(cls, path, name=None, **kw):
+        fs = list(util.recursive_traversable(path, ext='.txt'))
+        if not fs:
+            raise OSError(f"Unable to find wordlist: {path!r}")
+        wl = randomname.WordLists.combine([
+            randomname.WordListPackageFile(p, name.split('/',1)[-1])
+            for name, p in fs
+        ], name=name or path.name, **kw)
+        blacklist = path / '.blacklist'
+        if blacklist.is_file():
+            wl -= cls.as_wordlist(blacklist, '.blacklist')
         return wl

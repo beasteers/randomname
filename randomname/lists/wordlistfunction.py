@@ -19,7 +19,7 @@ class WordListFunction(WordList):
         assert len(lst.sample(3)) == 3, 'this should sample 3 ids'
 
     '''
-    def __init__(self, func, name=None, length=1000, *a, **kw):
+    def __init__(self, func, name=None, length=0, *a, **kw):
         self.func = func
         super().__init__([None]*length, name or func.__name__, *a, **kw)
 
@@ -44,8 +44,12 @@ class WordListFunction(WordList):
     def sample(self, n=None, unique=False, **kw):
         return sample_unique(self.func, n, unique=unique, **kw)
 
-    def match(self, pattern):
-        parts = pattern.split('/', 1)
-        if self.name == parts[0]:
-            return '/'.join([self.name] + parts[1:])
+    def _matches_name(self, pattern):
+        if self.name and '(' in pattern:
+            name, args = pattern.split('(', 1)
+            if super()._matches_name(name):
+                return f'{self.name}({args}'
+        elif super()._matches_name(pattern):
+            return self.name
+        return False
 

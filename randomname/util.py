@@ -2,6 +2,7 @@
 '''
 import os
 import glob
+import json
 from randomname import rng
 
 
@@ -9,6 +10,9 @@ class Aliases(dict):
     '''Manage string aliases'''
     def __init__(self, aliases=None):
         super().__init__(aliases or {})
+
+    def __str__(self):
+        return f'{self.__class__.__name__}({json.dumps(dict(self), indent=2)})'
 
     def __call__(self, name, char='/'):
         '''Replace aliases in string.'''
@@ -38,8 +42,8 @@ def join_path(*xs, char='/'):
     return char.join(x.strip(char) for x in xs if x)
 
 
-def join_words(it, sep='-', spaces=None):
-    return sep.join(str(p) for p in it if p).replace(' ', sep if not spaces and spaces != '' else spaces)
+def join_words(xs, sep='-', spaces=None):
+    return sep.join(str(p) for p in xs if p).replace(' ', sep if not spaces and spaces != '' else spaces)
 
 
 def prefix(pre, xs):
@@ -73,6 +77,12 @@ def sample_unique(func, n, *a, n_fails=50, unique=True, **kw):
     return words
 
 
+def unique(xs):
+    '''Like a set, but ordered.'''
+    seen = set()
+    return [x for x in xs if x not in seen and not seen.add(x)]
+
+
 
 def recursive_files(d='', ext='.txt'):
     '''Get all categories (subdirectories) from a word class (adjectives,
@@ -88,17 +98,28 @@ def recursive_files(d='', ext='.txt'):
 import importlib.resources
 
 
-def recursive_package_files(module, path, ext='.txt'):
-    ext = as_list(ext)
-    paths = {}
-    p = importlib.resources.files(module) / path
-    d = str(p)
-    for f in p.glob('**/*.txt'):
-        # hidden files
-        if any(s.startswith('.') for s in f.split(os.sep)): continue
-        for fi in f.iterdir():
-            paths[os.path.relpath(os.path.splitext(f)[0], d)] = fi
-    return module, paths
+# def recursive_package_files(module, path, ext='.txt'):
+#     ext = as_list(ext)
+#     paths = {}
+#     p = importlib.resources.files(module) / path
+#     d = str(p)
+#     for f in p.glob('**/*.txt'):
+#         # hidden files
+#         if any(s.startswith('.') for s in f.split(os.sep)): continue
+#         for fi in f.iterdir():
+#             paths[os.path.relpath(os.path.splitext(f)[0], d)] = fi
+#     return module, paths
+
+def recursive_traversable(path, parents=(), ext=None):
+    if path.is_file():
+        if ext and not path.name.endswith(ext):
+            return
+        yield join_path(*parents, os.path.splitext(path.name)[0]), path
+        return
+    if path.is_dir():
+        parents = parents + (path.name,)
+        for f in path.iterdir():
+            yield from recursive_traversable(f, parents, ext)
 
 
 # CLI parsing
@@ -106,7 +127,14 @@ def recursive_package_files(module, path, ext='.txt'):
 
 def as_multiple(x, sep=','):
     '''Ensure a list or tuple. This will also split comma separated strings (like from the cli).'''
-    return [si for s in as_list(x) for si in ([s] if callable(s) else str(s).split(sep) if sep else s)]
+    return [
+        si for s in as_list(x) 
+        for si in (
+            [s] if callable(s) else
+            s.split(sep) if sep and isinstance(s, str) else 
+            [s]
+        )
+    ]
 
 
 def as_list(x):

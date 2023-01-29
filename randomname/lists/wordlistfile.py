@@ -1,14 +1,17 @@
 import os
-try:
-    from importlib.resources import files as ir_files, as_file as ir_as_file
-except ImportError:
-    from importlib_resources import files as ir_files, as_file as ir_as_file
-
 import randomname
+from . import imprc
 from .lazywordlist import LazyWordList
 
 
-class WordListFile(LazyWordList):
+class _BaseWordListFile(LazyWordList):
+    comment_chars = ';#'
+    def _process_lines(self, lines):
+        lines = (l.strip() for l in lines)
+        lines = (l for l in lines if l and l[0] not in self.comment_chars)
+        return lines
+
+class WordListFile(_BaseWordListFile):
     '''
     A word list that gets loaded from file. This is loaded lazily, only when you try to sample from
     the word list, or if you do something like try to check its length.
@@ -28,16 +31,14 @@ class WordListFile(LazyWordList):
         assert len(lst.sample(3)) == 3, 'this should sample 3 words from the list'
     '''
     comment_chars = ';#'
-    def __init__(self, path, name=None, *a, lazy=True, **kw):  # process=None, filters=None, blacklist=None, 
+    def __init__(self, path, name=None, *a, **kw):
         self.path = path
-        # self.process = process
 
         if not os.path.exists(self.path):
             raise OSError("Word list does not exist.")
         super().__init__(
             (), name or os.path.splitext(os.path.basename(path))[0], 
-            *a, lazy=lazy, **kw)
-        
+            *a, **kw)
 
     def __repr__(self):
         return '{}({}, {})'.format(
@@ -46,28 +47,15 @@ class WordListFile(LazyWordList):
 
     def _load(self):
         with open(self.path, 'r') as f:
-            ls = (l.strip() for l in f)
-            ls = (l for l in ls if l and l[0] not in self.comment_chars)
-            # if self.process:
-            #     ls = (self.process(l) for l in ls)
-            # ls = (l for l in ls if all(f(l) for f in self.filters))
-            self.extend(ls)
+            self.extend(self._process_lines(f))
 
 
-class WordListPackageFile(LazyWordList):
-    def __init__(self, value, name=None, module=randomname, **kw):
-        self.module = module
-        super().__init__(value, name, **kw)
+class WordListPackageFile(_BaseWordListFile):
+    def __init__(self, handle, name=None, **kw):
+        assert isinstance(handle, imprc.resources_abc.Traversable)
+        self.handle = handle
+        super().__init__([], name or getattr(handle, 'name', None), **kw)
 
     def _load(self):
-        with ir_as_file(ir_files(self.module).joinpath(self.path)) as eml:
-            pass
-
-# class WordListPackage(LazyWordList):
-#     def __init__(self, value, name=None, module=randomname, exact_match=False, lazy=True):
-#         self.module = module
-#         super().__init__(value, name, exact_match, lazy)
-
-#     def _load(self):
-#         with ir_as_file(ir_files(self.module).joinpath(self.path)) as eml:
-#             pass
+        f = self.handle.read_text().splitlines()
+        self.extend(self._process_lines(f))
