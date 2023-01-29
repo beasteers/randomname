@@ -1,3 +1,4 @@
-from PyInstaller.utils.hooks import collect_data_files
+import os
 
-datas = collect_data_files('randomname', includes=['words/**/*.txt'])
+def get_hook_dirs():
+    return [os.path.dirname(__file__)]
