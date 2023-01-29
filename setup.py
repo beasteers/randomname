@@ -15,7 +15,10 @@ setuptools.setup(
     url='https://github.com/{}/{}'.format(USERNAME, NAME),
     packages=setuptools.find_packages(),
     package_data={NAME: [str(path.relative_to(NAME)) for path in Path(f"{NAME}/wordlists").rglob("*.txt")]},
-    entry_points={'console_scripts': ['{name}={name}:main'.format(name=NAME)]},
+    entry_points={
+        'console_scripts': ['{name}={name}:main'.format(name=NAME)],
+        "pyinstaller40": ["hook-dirs=randomname.__pyinstaller:get_hook_dirs"],
+    },
     install_requires=['fire'],
     tests_require=['pytest'],
     license='MIT License',
