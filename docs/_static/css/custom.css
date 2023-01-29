@@ -1,0 +1,43 @@
+.highlight-compact {
+    margin-bottom: 0 !important;
+}
+.highlight-compact .highlight {
+    margin-bottom: 0 !important;
+}
+
+.code-group {
+    margin-bottom: 1em !important;
+}
+
+.code-group .highlight-default {
+    position: relative;
+    margin-bottom: 0px !important;
+}
+
+.code-group .highlight-default .highlight {
+    padding-top: 0.4em !important;
+    margin-bottom: 0px !important;
+}
+
+.highlight-default::before {
+    position: absolute;
+    top: 0; left: 0;
+    font-size: 0.7em;
+    background-color: #0000005c;
+    color: white;
+    padding: 0.1em 0.3em 0.2em;
+    border-radius: 0 0 4px 0;
+}
+
+.highlight-source::before {
+    /* content: ":"; */
+}
+
+.highlight-output::before {
+    content: "Output:";
+}
+
+.highlight-error::before {
+    content: "Error:";
+    background-color: #c50033db;
+}

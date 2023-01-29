@@ -24,7 +24,7 @@ copyright = '2022, Bea Steers'
 author = 'Bea Steers'
 
 # The full version, including alpha/beta/rc tags
-release = '0.2.0'
+release = '1.0.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -40,6 +40,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
     'exec_code',
+    'sphinx_tabs.tabs',
 ]
 
 pygments_style = 'manni'  # 'arduino', 'material', 'inkpot'
@@ -66,4 +67,4 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_css_files = ['css/rtd_dark.css']
+html_css_files = ['css/rtd_dark.css', 'css/custom.css']

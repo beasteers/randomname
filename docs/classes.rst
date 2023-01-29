@@ -1,11 +1,26 @@
 
-Builtin Wordlists
+Available Wordlists
 ------------------------
 
  - `imsky`_
  - `Enchanted Learning`_
  - `Pokemon`_
- - `wordnet`_
+ - `wordnet`_ (not loaded by default)
+
+.. exec-code::
+
+   import randomname
+   wl = randomname.get_wordlist()
+   print(wl)
+   for l in wl.lists:
+      print(l.name, len(l.lists), 'lists', len(l), 'words')
+
+
+.. exec-code::
+
+   import randomname
+   wl = randomname.get_wordlist('wordnet')
+   print(len(wl.lists), 'lists', len(wl), 'words')
 
 imsky
 ^^^^^^^^^^^^^^^^^^^
@@ -20,17 +35,9 @@ beginning of the project.
 .. exec-code::
 
    import randomname
-
-   wordlists = randomname.get_wordlist('imsky')
-   print(len(wordlists.lists))
-
-   pos = sorted({l.name.split('/')[0] for l in randomname.wordlists.lists})
-   for k in pos:
-      print(k)
-      wl = randomname.wordlists.filter_lists(f'{k}/')
-      wl.lists.sort()
-      print(wl)
-      print()
+   wl = randomname.get_wordlist('imsky')
+   for l in wl.lists:
+      print(f'{wl.name}/{l.name}:', len(l), 'words')
 
 
 Enchanted Learning
@@ -40,40 +47,32 @@ Access by name: ``enchanted``
 
 Source: https://www.enchantedlearning.com/wordlist/
 
+These lists weren't originally divided by part of speech so we use `randomname/fab/categorize.py` to divide them by Part of Speech 
+using ``nltk``'s ``owm-1.4`` corpus. Any words with multiple parts of speech are placed in each one.
+
 .. exec-code::
 
    import randomname
-
-   wordlists = randomname.get_wordlist('enchanted')
-   print(len(wordlists.lists))
-
-   pos = sorted({l.name.split('/')[0] for l in wordlists.lists})
-   for k in pos:
-      print(k)
-      wl = wordlists.filter_lists(f'{k}/')
-      wl.lists.sort()
-      print(wl)
-      print()
+   wl = randomname.get_wordlist('enchanted')
+   for l in wl.lists:
+      print(f'{wl.name}/{l.name}:', len(l), 'words')
 
 
-
-Pokemon!
+Pokemon
 ^^^^^^^^^^^^^^^
 
 Access by name: ``pokemon``
 
-Source: https://www.reddit.com/r/pokemon/comments/1qrnw8/i_made_a_few_plain_text_printer_friendly_pokemon/
-
-Pokemon names \<3
-
-TODO: add types, moves, towns, gym leaders?
+Source:
+ - ``names`` of Pokemon: https://www.slowpoketail.com/post/pokemon-list-by-name
+ - Everything else: https://bulbapedia.bulbagarden.net/
 
 .. exec-code::
 
    import randomname
-
-   wordlists = randomname.get_wordlist('pokemon')
-   print(wordlists)
+   wl = randomname.get_wordlist('pokemon')
+   for l in wl.lists:
+      print(f'{wl.name}/{l.name}:', len(l), 'words')
 
 
 wordnet
@@ -85,7 +84,7 @@ Source: https://wordnet.princeton.edu/download/current-version
 
 If you want a broader vocabulary, I've also pulled the dictionary used by 
 wordnet (extracted from their database files). The word groupings are from 
-``nltk synsets.lexname()`` so I don't know what some of them mean (like adjectives ????).
+``nltk synsets.lexname()``.
 
 If you have a better way to get word groups from nltk please let me know!!
 
@@ -93,17 +92,9 @@ If you have a better way to get word groups from nltk please let me know!!
 .. exec-code::
 
    import randomname
-
-   wordlists = randomname.get_wordlist('wordnet')
-   print(len(wordlists.lists))
-
-   pos = sorted({l.name.split('/')[0] for l in wordlists.lists})
-   for k in pos:
-      print(k)
-      wl = wordlists.filter_lists(f'{k}/')
-      wl.lists.sort()
-      print(wl)
-      print()
+   wl = randomname.get_wordlist('wordnet')
+   for l in wl.lists:
+      print(f'{wl.name}/{l.name}:', len(l), 'words')
 
 You can download the wordnet database files and run these commands to extract the words for yourself.
 
@@ -118,14 +109,7 @@ You can download the wordnet database files and run these commands to extract th
 
    this is basically the english dictionary 
    meaning it includes swears and slurs. I've included a blacklist 
-   (modified from a list by CMU) to exclude racist, sexist, homophobic, transphobic, 
-   ablist, and explicitly sexual (and genital-related) terms,
-   but obviously I don't have time to scour the entire dictionary, so use at your own risk (!!) 
-   and feel free to manage your own blacklist.
-   And if you find more offensive words, especially racist slurs, please submit a PR to include them 
-   in the blacklist. But keep in mind, I don't have much bandwidth to manage this 
-   project so try not to be too anal (ha!) about words that are context-specific and can 
-   be interpreted in multiple ways.
+   (modified from a list by CMU) to exclude some innapropriate terms.
 
 
 Other word lists
