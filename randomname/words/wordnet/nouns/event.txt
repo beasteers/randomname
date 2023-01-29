@@ -52,7 +52,6 @@ accompaniment
 adjustment
 adrenarche
 advance
-advent
 adversity
 affair
 affairs
@@ -76,10 +75,8 @@ appalling
 apparition
 appearance
 approach
-ascension
 ascent
 associate
-assumption
 atavism
 athletics
 atrophy
@@ -101,7 +98,6 @@ backflow
 background
 backlash
 backspin
-ball
 bang
 banging
 bark
@@ -111,9 +107,7 @@ bay
 beat
 beep
 beginning
-bell
 belt
-bend
 bending
 betterment
 billow
@@ -158,7 +152,6 @@ buzz
 cackle
 cacophony
 calamity
-calvary
 campaign
 campfire
 capsizing
@@ -252,13 +245,10 @@ crackle
 cracklings
 crash
 creak
-creation
 creep
 creeps
 crisis
 crosstalk
-crow
-crucifixion
 crunch
 cry
 crying
@@ -271,7 +261,6 @@ dance
 dash
 dawn
 deal
-death
 debacle
 debilitation
 decathlon
@@ -302,7 +291,6 @@ devastation
 development
 deviation
 dextrorotation
-diaspora
 diastole
 difference
 diffusion
@@ -348,7 +336,6 @@ easing
 ebb
 ebbtide
 eclipse
-eddy
 egress
 elaboration
 elevation
@@ -365,7 +352,6 @@ enervation
 engagement
 entrance
 epidemic
-epiphany
 episode
 eradication
 error
@@ -390,7 +376,6 @@ factor
 fadeout
 failure
 faint
-fall
 falls
 famine
 fatality
@@ -437,7 +422,6 @@ fusion
 fuss
 gargle
 generation
-genesis
 germination
 gleam
 glint
@@ -470,7 +454,6 @@ heartbreaker
 heat
 heave
 heaves
-hell
 hiatus
 hiss
 hit
@@ -493,7 +476,6 @@ improvement
 impulse
 incident
 increase
-independence
 induction
 inevitable
 infection
@@ -555,7 +537,6 @@ makeup
 malformation
 malfunction
 manifestation
-marathon
 martyrdom
 match
 materialization
@@ -576,7 +557,6 @@ miscarriage
 misfire
 misfortune
 mishap
-miss
 mix
 mixture
 moderation
@@ -644,7 +624,6 @@ piece
 pileup
 pin
 pinch
-ping
 pity
 plague
 play
@@ -729,7 +708,6 @@ resolution
 respite
 result
 resultant
-resurrection
 return
 reversal
 reverse
@@ -761,7 +739,6 @@ runaway
 runoff
 runup
 rupture
-rush
 rustle
 rustling
 sacrifice
@@ -789,7 +766,6 @@ sequel
 sequella
 sequence
 series
-set
 settling
 severance
 shakedown
@@ -831,7 +807,6 @@ snore
 soliton
 song
 sound
-spark
 sparkle
 spatter
 spike
@@ -934,7 +909,6 @@ tragedy
 train
 tramp
 trample
-transfiguration
 transformation
 transient
 transition
@@ -952,7 +926,6 @@ trip
 triumph
 trouble
 tsunami
-turkey
 turn
 turning
 twang
@@ -962,7 +935,6 @@ twist
 undertide
 undertow
 undulation
-union
 upheaval
 uplift
 uplifting
@@ -985,9 +957,7 @@ wallow
 waltz
 waning
 warp
-waterloo
 watershed
-wave
 waxing
 weakening
 wedding

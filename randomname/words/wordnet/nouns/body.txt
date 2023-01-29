@@ -1,6 +1,5 @@
 a
 ab
-ab
 afro
 astragalus
 atlas
@@ -121,9 +120,7 @@ asterion
 astrocyte
 astroglia
 atheroma
-atlas
 atrium
-attic
 auricle
 auricula
 auriculare
@@ -131,12 +128,10 @@ autacoid
 autograft
 autoplasty
 autosome
-axis
 axolemma
 axon
 back
 backbone
-ball
 band
 bang
 baroreceptor
@@ -185,8 +180,6 @@ bulb
 bulla
 bullethead
 bunghole
-bursa
-bush
 bust
 butt
 buttock
@@ -207,7 +200,6 @@ capitate
 capsule
 caput
 cardia
-carina
 cartilage
 caruncle
 case
@@ -253,7 +245,6 @@ cisterna
 clapper
 claustrum
 clavicle
-clay
 cleavage
 clitoris
 cloaca
@@ -263,9 +254,7 @@ coccyx
 cochlea
 cock
 coif
-cola
 collagen
-colon
 colostrum
 column
 commissure
@@ -292,7 +281,6 @@ cremains
 crimp
 crotaphion
 crotch
-crown
 crus
 cubitus
 cunt
@@ -325,7 +313,6 @@ dogtooth
 dome
 dominant
 dorsum
-down
 dreadlock
 dribble
 drivel
@@ -460,7 +447,6 @@ gob
 gonad
 gonadotropin
 gonion
-gore
 gorge
 graft
 granulocyte
@@ -502,7 +488,6 @@ hindgut
 hindquarters
 hip
 hipbone
-hippocampus
 histamine
 histiocyte
 hole
@@ -516,7 +501,6 @@ humerus
 humor
 hyaloplasm
 hybridoma
-hymen
 hyoid
 hypochondria
 hypochondrium
@@ -578,7 +562,6 @@ left
 leg
 legs
 lemniscus
-lens
 leptomeninges
 leukocyte
 leukorrhea
@@ -611,7 +594,6 @@ macula
 macule
 malleus
 mane
-mantle
 manubrium
 marcel
 marrow
@@ -656,13 +638,11 @@ microsome
 microtubule
 midbrain
 middle
-milk
 minge
 minimus
 mitochondrion
 modifier
 modiolus
-mohawk
 molar
 monoblast
 monocyte
@@ -714,7 +694,6 @@ nozzle
 nucleolus
 nucleoplasm
 nucleus
-nut
 obelion
 oblique
 occiput
@@ -755,7 +734,6 @@ oxytocin
 pacemaker
 pageboy
 palate
-palatine
 paleencephalon
 paleocerebellum
 pallidum
@@ -773,7 +751,6 @@ parts
 passage
 passageway
 pate
-patella
 pathway
 paw
 pectoral
@@ -818,8 +795,6 @@ pogonion
 poll
 polls
 polygene
-pompadour
-pons
 ponytail
 pore
 portal
@@ -850,7 +825,6 @@ pump
 punctum
 pupil
 purulence
-pus
 putamen
 putz
 pylorus
@@ -873,7 +847,6 @@ region
 relaxin
 remains
 reticulocyte
-reticulum
 retina
 rhinencephalon
 rhinion
@@ -948,7 +921,6 @@ snout
 socket
 sole
 soleus
-soma
 somatotropin
 specimen
 sperm
@@ -970,7 +942,6 @@ spongioblast
 stapes
 stemma
 stephanion
-stern
 sternocleidomastoid
 sternum
 stick
@@ -1045,7 +1016,6 @@ tragus
 transgene
 transplant
 trap
-trapezium
 trapezius
 trapezoid
 triceps
@@ -1095,8 +1065,6 @@ vulva
 waist
 wall
 wattle
-wave
-whitehead
 wrist
 zone
 zonule

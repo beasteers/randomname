@@ -249,7 +249,6 @@ fossilization
 fractionation
 fragmentation
 freeze
-frost
 fructification
 fusion
 galactosis
@@ -519,7 +518,6 @@ selection
 sensitization
 sequestration
 sericulture
-set
 shaping
 shedding
 shit
@@ -585,7 +583,6 @@ ulceration
 ultracentrifugation
 underdevelopment
 unfolding
-union
 uptake
 urbanization
 urochesia

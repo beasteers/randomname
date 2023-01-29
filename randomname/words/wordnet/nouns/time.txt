@@ -1,5 +1,4 @@
 ab
-ab
 adar
 advent
 aghan
@@ -162,7 +161,6 @@ acceleration
 administration
 adolescence
 adulthood
-advent
 afterlife
 afternoon
 age
@@ -175,16 +173,11 @@ anniversary
 annum
 antiquity
 apogee
-ascension
-assumption
 attendance
 attosecond
-aurora
 bachelorhood
-baroque
 bedtime
 beginning
-bell
 bicentennial
 bimester
 bimillennium
@@ -202,7 +195,6 @@ breath
 bygone
 caesura
 calendar
-caliphate
 cease
 centennial
 century
@@ -211,7 +203,6 @@ checkout
 childhood
 chukka
 chukker
-circumcision
 climacteric
 clocking
 commencement
@@ -226,19 +217,16 @@ cycle
 dark
 date
 dawn
-day
 daylight
 days
 dead
 deadline
-death
 deathbed
 deathrate
 decade
 deceleration
 deep
 delay
-depression
 dinnertime
 distance
 dogwatch
@@ -254,16 +242,13 @@ ending
 enlistment
 eon
 ephemera
-epiphany
 episcopate
 epoch
 equinox
 era
 eternity
-eve
 evening
 extension
-fall
 falls
 femtosecond
 feria
@@ -298,7 +283,6 @@ groundspeed
 half
 halftime
 heartbeat
-hertz
 history
 hitch
 hold
@@ -310,7 +294,6 @@ hours
 hypervelocity
 ides
 immortality
-incarnation
 incipiency
 incubation
 incumbency
@@ -348,7 +331,6 @@ lunchtime
 lustrum
 majority
 manana
-march
 matins
 maturity
 meal
@@ -372,7 +354,6 @@ moment
 mons
 monsoon
 month
-moon
 moratorium
 morning
 morrow
@@ -428,7 +409,6 @@ prohibition
 puberty
 puerperium
 pulse
-pus
 quadrennium
 quarter
 quatercentennial
@@ -438,13 +418,10 @@ quinquennium
 rag
 rate
 rates
-reconstruction
-regency
 reign
 relief
 respite
 rest
-restoration
 retardation
 rhythm
 round
@@ -463,7 +440,6 @@ senility
 sentence
 sesquicentennial
 session
-set
 seventies
 sext
 sheepshearing
@@ -512,7 +488,6 @@ tomorrow
 tonight
 top
 tour
-transfiguration
 trick
 trimester
 turn

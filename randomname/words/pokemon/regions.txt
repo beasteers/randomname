@@ -1,0 +1,10 @@
+unova
+paldea
+kalos
+johto
+galar
+sinnoh
+kanto
+hoenn
+seviiislands
+alola

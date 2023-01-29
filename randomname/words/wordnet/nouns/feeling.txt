@@ -117,7 +117,6 @@ defeat
 defeatism
 delight
 demoralization
-depression
 desire
 despair
 despisal
@@ -205,7 +204,6 @@ friendliness
 frisson
 frustration
 fulfillment
-fury
 fussiness
 gaiety
 gall
@@ -237,7 +235,6 @@ helplessness
 hesitance
 hilarity
 homesickness
-hope
 hopefulness
 hopelessness
 horror
@@ -339,7 +336,6 @@ pall
 pang
 panic
 partiality
-passion
 pathos
 peace
 peeve
@@ -387,7 +383,6 @@ respects
 restlessness
 reverence
 rue
-rush
 sadism
 sadness
 sadomasochism

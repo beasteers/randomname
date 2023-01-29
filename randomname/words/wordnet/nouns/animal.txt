@@ -2849,7 +2849,6 @@ accentor
 acidophil
 acidophilus
 acrodont
-actinia
 actinomyces
 actinomycete
 actinomyxidian
@@ -2865,7 +2864,6 @@ admiral
 adult
 aerobe
 affenpinscher
-afghan
 afropavo
 aftershaft
 agama
@@ -2885,7 +2883,6 @@ allosaur
 alpaca
 alphavirus
 alula
-amazon
 amberjack
 ambulacrum
 ambystomid
@@ -2896,7 +2893,6 @@ amphibia
 amphibian
 amphidiploid
 amphipod
-amphisbaena
 amphiuma
 anaconda
 anaerobe
@@ -2953,8 +2949,6 @@ arenavirus
 argali
 argentine
 argentinosaur
-argonaut
-argus
 arista
 armadillo
 armor
@@ -2964,7 +2958,6 @@ arthropod
 ascidian
 asp
 ass
-assault
 auk
 auklet
 aurochs
@@ -3027,7 +3020,6 @@ beluga
 beroe
 bettong
 bigeye
-bighorn
 bill
 billfish
 billy
@@ -3102,11 +3094,9 @@ bovine
 bowerbird
 bowfin
 bowhead
-boxer
 boxfish
 brachiopod
 brachyuran
-brahman
 brambling
 brant
 bream
@@ -3127,12 +3117,9 @@ browntail
 bruin
 brush
 bryozoan
-bubo
-buck
 buckskin
 buckskins
 budgerigar
-buffalo
 buffalofish
 bufflehead
 bufo
@@ -3140,7 +3127,6 @@ bug
 bulbul
 bull
 bulldog
-bullfinch
 bullfrog
 bullhead
 bullock
@@ -3168,13 +3154,11 @@ caddisworm
 caecilian
 caiman
 cairn
-calamus
 calf
 calosoma
 calyculus
 camel
 canary
-cancer
 canine
 cankerworm
 cannon
@@ -3191,7 +3175,6 @@ caracara
 carancha
 carapace
 carcase
-cardigan
 cardinal
 cardinalfish
 caribou
@@ -3207,14 +3190,12 @@ cassowary
 cat
 catalufa
 catbird
-caterpillar
 catfish
 catostomid
 cattalo
 cattle
 cavy
 cayuse
-cecropia
 centipede
 cephalochordate
 cephalopod
@@ -3258,7 +3239,6 @@ chimaera
 chimpanzee
 chinchilla
 chine
-chinook
 chipmunk
 chiton
 chlamydia
@@ -3281,10 +3261,8 @@ cichlid
 ciliate
 cilium
 cinnabar
-circus
 cirrus
 cisco
-citation
 civet
 clam
 clamshell
@@ -3325,7 +3303,6 @@ coliphage
 collembolan
 collie
 colobus
-colt
 comb
 comma
 commensal
@@ -3356,7 +3333,6 @@ cormorant
 corncrake
 cornetfish
 coronet
-corydalis
 corynebacterium
 corythosaur
 coscoroba
@@ -3379,7 +3355,6 @@ coyote
 coypu
 crab
 crake
-crane
 crapaud
 crappie
 craw
@@ -3393,11 +3368,9 @@ critter
 croaker
 crocodile
 crop
-cross
 crossbill
 crossopterygian
 croup
-crow
 crowbait
 crustacean
 cryptomonad
@@ -3420,7 +3393,6 @@ cutlassfish
 cuttlefish
 cutworm
 cyanobacteria
-cyclops
 cyclostome
 cygnet
 cynodont
@@ -3432,7 +3404,6 @@ dabbler
 dabchick
 dace
 dachshund
-dalmatian
 dam
 damselfish
 damselfly
@@ -3492,11 +3463,9 @@ dotterel
 douroucouli
 dove
 dowitcher
-down
 dragon
 dragonet
 dragonfly
-drake
 driftfish
 drill
 dromaeosaur
@@ -3537,7 +3506,6 @@ eland
 elapid
 elasmobranch
 elbow
-electrophorus
 elephant
 elk
 elver
@@ -3568,12 +3536,10 @@ euglena
 euglenoid
 eukaryote
 eurypterid
-ewe
 eyas
 eyecup
 falcon
 fanaloka
-fang
 fawn
 feather
 feeder
@@ -3630,8 +3596,6 @@ forelock
 forepaw
 foretop
 forewing
-fossa
-fox
 foxhound
 freetail
 fritillary
@@ -3669,7 +3633,6 @@ gelding
 gelechiid
 gempylid
 gemsbok
-genet
 geoduck
 geometrid
 gerbil
@@ -3678,7 +3641,6 @@ germ
 giant
 giardia
 gib
-gibbon
 gill
 giraffe
 gizzard
@@ -3716,7 +3678,6 @@ grade
 grampus
 grassfinch
 grasshopper
-gray
 grebe
 greenbottle
 greeneye
@@ -3726,7 +3687,6 @@ greenshank
 greenwing
 gregarine
 grenadier
-grey
 greyback
 greyhen
 greyhound
@@ -3751,7 +3711,6 @@ gudgeon
 guenon
 guereza
 guillemot
-guinea
 guitarfish
 gulfweed
 gull
@@ -3771,7 +3730,6 @@ hagfish
 hair
 hairstreak
 hake
-halcyon
 halfbeak
 halibut
 halobacteria
@@ -3785,9 +3743,7 @@ hands
 haploid
 haplosporidian
 hare
-harpy
 harrier
-hart
 hartebeest
 harvestfish
 harvestman
@@ -3800,7 +3756,6 @@ head
 hedgehog
 heifer
 heliozoan
-helix
 hellbender
 hellgrammiate
 helminth
@@ -3819,7 +3774,6 @@ hind
 hindfoot
 hindquarters
 hinny
-hippocampus
 hippopotamus
 hoatzin
 hobby
@@ -3830,7 +3784,6 @@ hogfish
 holocephalan
 holometabola
 homeotherm
-homer
 hominid
 hominoid
 homo
@@ -3849,7 +3802,6 @@ horse
 horseback
 horsefly
 horseleech
-host
 hound
 housedog
 housefly
@@ -3858,7 +3810,6 @@ humanity
 hummingbird
 humpback
 hybrid
-hydra
 hydrozoan
 hyena
 hypermastigote
@@ -3898,11 +3849,9 @@ jaguar
 jaguarundi
 jassid
 jawfish
-jay
 jellyfish
 jennet
 jerboa
-jersey
 jewfish
 jird
 junco
@@ -3948,8 +3897,6 @@ lactobacillus
 ladybug
 ladyfish
 lagomorph
-lama
-lamb
 lambkin
 lamprey
 lancelet
@@ -3961,13 +3908,11 @@ lapin
 lappet
 lapwing
 largemouth
-lari
 larid
 lark
 larva
 larvacean
 lasiocampid
-laver
 layer
 leafhopper
 leatherjacket
@@ -3994,7 +3939,6 @@ lioness
 lionet
 lionfish
 lip
-liparis
 listeria
 littleneck
 livestock
@@ -4017,11 +3961,9 @@ loon
 lorica
 lorikeet
 lory
-lota
 louse
 louvar
 lovebird
-lug
 lugworm
 lumpfish
 lumpsucker
@@ -4041,7 +3983,6 @@ magpie
 maigre
 mako
 malamute
-male
 maleo
 malinois
 mallard
@@ -4049,7 +3990,6 @@ mamba
 mammal
 mammoth
 mamo
-man
 manakin
 manatee
 mandrill
@@ -4061,7 +4001,6 @@ mantis
 mantispid
 manul
 mapinguari
-mara
 marabou
 mare
 margate
@@ -4072,7 +4011,6 @@ marmoset
 marmot
 marsupial
 marten
-martin
 massasauga
 mastiff
 mastodon
@@ -4082,13 +4020,11 @@ meadowlark
 mealworm
 mealybug
 mecopteran
-medusa
 meerkat
 megalosaur
 megapode
 megatherian
 menhaden
-mephitis
 merganser
 merino
 merozoite
@@ -4106,7 +4042,6 @@ microorganism
 microsporidian
 midge
 migrator
-miller
 millipede
 milt
 mink
@@ -4119,14 +4054,12 @@ moke
 mole
 mollie
 mollusk
-moloch
 molter
 monad
 monal
 monarch
 moneran
 mongoose
-monitor
 monkey
 monkfish
 monohybrid
@@ -4191,7 +4124,6 @@ neuropteron
 newt
 nib
 nighthawk
-nightingale
 nilgai
 nit
 nitrobacterium
@@ -4207,7 +4139,6 @@ numbat
 nummulite
 nutcracker
 nuthatch
-nyala
 nymph
 nymphalid
 oarfish
@@ -4271,7 +4202,6 @@ painter
 palfrey
 palometa
 palomino
-pan
 pangolin
 panther
 papillon
@@ -4281,16 +4211,13 @@ paramecium
 paramyxovirus
 parapodium
 parasite
-parr
 parrot
 parrotfish
 partridge
 parvovirus
-passer
 passerine
 pastern
 patas
-patella
 pathogen
 paw
 peachick
@@ -4326,7 +4253,6 @@ phasianid
 phasmid
 pheasant
 phenacomys
-phoebe
 phoronid
 phragmocone
 phycobilin
@@ -4334,7 +4260,6 @@ phycocyanin
 phycoerythrin
 physa
 phytoplankton
-pica
 pichiciago
 pickerel
 picornavirus
@@ -4393,7 +4318,6 @@ pointer
 polecat
 poliovirus
 poll
-pollack
 pollard
 pollinator
 polls
@@ -4476,7 +4400,6 @@ puppy
 pussycat
 pyralid
 pyrrhuloxia
-python
 quadruped
 quagga
 quahaug
@@ -4493,7 +4416,6 @@ racer
 racerunner
 radiolarian
 rail
-raja
 ram
 rat
 ratel
@@ -4520,11 +4442,9 @@ remora
 remount
 reovirus
 reptile
-reticulum
 retriever
 retrovirus
 rhabdovirus
-rhea
 rhesus
 rhinoceros
 rhinovirus
@@ -4569,12 +4489,10 @@ runner
 sable
 saddle
 saddlebill
-sagitta
 saiga
 sailfish
 saki
 salamander
-salmon
 salmonella
 salmonid
 salp
@@ -4634,8 +4552,6 @@ searcher
 seashell
 seasnail
 seaweed
-secretariat
-sepia
 serin
 serotine
 serow
@@ -4685,9 +4601,7 @@ simian
 siphon
 siphonophore
 sire
-siren
 siskin
-sitter
 skate
 skimmer
 skin
@@ -4706,7 +4620,6 @@ smew
 smoothhound
 snail
 snailfish
-snake
 snakebird
 snakeblenny
 snakefly
@@ -4777,13 +4690,11 @@ steenbok
 steeplechaser
 stegosaur
 stenopterygius
-stentor
 stepper
 stickleback
 sticktight
 stifle
 stilt
-stinger
 stingray
 stint
 stirk
@@ -4811,7 +4722,6 @@ style
 stylet
 styracosaur
 sucker
-suckling
 sunfish
 superbug
 surfbird
@@ -4823,7 +4733,6 @@ suslik
 swallow
 swan
 sweeper
-swift
 swiftlet
 swimmeret
 swine
@@ -4845,7 +4754,6 @@ tamandua
 tamarau
 tamarin
 tanager
-tang
 tapeworm
 tapir
 tarantula
@@ -4870,7 +4778,6 @@ terrapin
 terrier
 test
 testacean
-testudo
 tetra
 tetrahymena
 tetrapod
@@ -4903,7 +4810,6 @@ tigress
 tilefish
 timucu
 tinamou
-tinea
 tineid
 tineoid
 tinker
@@ -4940,7 +4846,6 @@ trichomonad
 triggerfish
 trilobite
 tripletail
-triton
 trogon
 trombiculid
 trombidiid
@@ -4958,7 +4863,6 @@ tumbler
 tuna
 tunicate
 turbot
-turkey
 turnstone
 turtle
 turtledove
@@ -5025,7 +4929,6 @@ warbler
 warhorse
 warrigal
 warthog
-wasp
 watchdog
 waterbuck
 waterdog
@@ -5043,7 +4946,6 @@ wether
 whale
 wheatear
 wheatworm
-wheeler
 whelk
 whiff
 whinchat
@@ -5051,7 +4953,6 @@ whippet
 whippoorwill
 whiptail
 whisker
-whistler
 whitebait
 whiteface
 whitefish
@@ -5071,7 +4972,6 @@ wireworm
 wisent
 wishbone
 withers
-wolf
 wolffish
 wolfhound
 wolverine
@@ -5089,7 +4989,6 @@ world
 worm
 wrack
 wrasse
-wren
 wrymouth
 wryneck
 xanthomonad
@@ -5101,7 +5000,6 @@ yellowlegs
 yellowtail
 yellowthroat
 yolk
-young
 zebra
 zebu
 zooid

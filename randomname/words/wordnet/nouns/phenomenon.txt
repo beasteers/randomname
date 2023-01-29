@@ -34,7 +34,6 @@ arc
 attraction
 attrition
 aureole
-aurora
 autofluorescence
 ballistics
 beam
@@ -50,7 +49,6 @@ blow
 bluster
 bolide
 bolt
-bond
 brainwave
 branch
 breath
@@ -64,10 +62,8 @@ carrier
 catastrophe
 chance
 change
-chaos
 charge
 chemiluminescence
-chinook
 chop
 circulation
 cloud
@@ -86,7 +82,6 @@ current
 cyclone
 cyclosis
 daylight
-death
 debacle
 decalescence
 decay
@@ -157,7 +152,6 @@ freeze
 friction
 fringe
 front
-frost
 gale
 galvanism
 gangrene
@@ -225,7 +219,6 @@ mist
 mistral
 moment
 monsoon
-moon
 moonbeam
 moonlight
 moonshine
@@ -315,12 +308,10 @@ sleet
 slipstream
 smoke
 smother
-snow
 snowflake
 sound
 southeaster
 southwester
-spark
 spectrum
 spillover
 sprinkle
@@ -384,7 +375,6 @@ wallop
 wash
 waterpower
 waterspout
-wave
 weather
 whiff
 whirlwind

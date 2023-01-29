@@ -2189,7 +2189,6 @@ acrocarp
 acrogen
 aculeus
 acumen
-adonis
 aeciospore
 aecium
 aerides
@@ -2217,7 +2216,6 @@ aloes
 alstroemeria
 althea
 alumroot
-alyssum
 amaranth
 amarelle
 amaryllis
@@ -2228,9 +2226,7 @@ amorpha
 amorphophallus
 anchusa
 androecium
-andromeda
 andryala
-anemia
 anemone
 angelica
 angelim
@@ -2297,7 +2293,6 @@ avocado
 awlwort
 awn
 axil
-axis
 axseed
 ayapana
 azalea
@@ -2325,10 +2320,8 @@ basidiolichen
 basidiomycete
 basidiospore
 basidium
-basil
 bassine
 basswood
-bast
 bay
 bayberry
 beak
@@ -2349,11 +2342,8 @@ bellwort
 belvedere
 bennet
 bent
-benzoin
 bergamot
 bergenia
-berry
-beta
 betel
 biennial
 bignoniad
@@ -2390,11 +2380,9 @@ bloomers
 blueberry
 bluebonnet
 bluebottle
-bluegrass
 bluestem
 blueweed
 bocconia
-bole
 bolete
 boll
 bonduc
@@ -2457,9 +2445,7 @@ bur
 burdock
 burgrass
 burl
-burr
 burrawong
-bush
 butt
 butterbur
 buttercup
@@ -2475,7 +2461,6 @@ calabash
 caladenia
 caladium
 calamint
-calamus
 calanthe
 calceolaria
 calendula
@@ -2485,7 +2470,6 @@ calliopsis
 callus
 caltrop
 calyculus
-calypso
 calyptra
 calyx
 camas
@@ -2548,7 +2532,6 @@ cattleya
 caudex
 cauliflower
 cayenne
-cecropia
 cedar
 ceibo
 celandine
@@ -2618,7 +2601,6 @@ clover
 clusia
 coachwhip
 cobnut
-coca
 cocklebur
 cockscomb
 cockspur
@@ -2631,7 +2613,6 @@ coelogyne
 coffee
 coffeeberry
 coir
-cola
 coleus
 colicroot
 collard
@@ -2656,7 +2637,6 @@ coontie
 coralbells
 coralberry
 coralwood
-corchorus
 cordgrass
 coreopsis
 coriander
@@ -2673,7 +2653,6 @@ corona
 coronilla
 corozo
 cortina
-corydalis
 corymb
 coryphantha
 cosmos
@@ -2705,7 +2684,6 @@ crotalaria
 croton
 crottle
 crowberry
-crown
 crownbeard
 crucifer
 cryptocoryne
@@ -2745,7 +2723,6 @@ daisybush
 dallisgrass
 dandelion
 dangleberry
-daphne
 darnel
 davallia
 deadwood
@@ -2885,7 +2862,6 @@ fruitage
 fruitlet
 fruitwood
 fuchsia
-fuji
 fumewort
 fumitory
 fungus
@@ -2916,7 +2892,6 @@ genip
 genipa
 genlisea
 gentian
-gentianella
 geophyte
 geranium
 gerardia
@@ -2939,7 +2914,6 @@ glomerule
 gloriosa
 gloxinia
 glume
-glycine
 gnetum
 goatsfoot
 goldenbush
@@ -2958,7 +2932,6 @@ granadilla
 grape
 grapefruit
 grapevine
-grass
 gravelweed
 greasewood
 greenery
@@ -2969,7 +2942,6 @@ groundnut
 groundsel
 grouseberry
 grugru
-guaiacum
 guama
 guar
 guava
@@ -3032,7 +3004,6 @@ hickory
 hilum
 hip
 hippeastrum
-holly
 hollyhock
 holophyte
 honesty
@@ -3053,7 +3024,6 @@ hovea
 hoya
 huckleberry
 huisache
-hull
 husk
 hyacinth
 hydathode
@@ -3109,7 +3079,6 @@ kernel
 keteleeria
 ketembilla
 keurboom
-key
 kingwood
 kino
 kiwi
@@ -3137,7 +3106,6 @@ larch
 larkspur
 latanier
 laticifer
-laurel
 laurelwood
 lavender
 lawyerbush
@@ -3155,7 +3123,6 @@ lemma
 lemon
 lemongrass
 lemonwood
-lens
 lenticel
 lentil
 lepidobotrys
@@ -3179,7 +3146,6 @@ linden
 ling
 lingonberry
 lip
-liparis
 liquidambar
 litchi
 lithophyte
@@ -3201,7 +3167,6 @@ loofah
 loosestrife
 loquat
 lorchel
-lotus
 lovage
 luffa
 lupine
@@ -3218,7 +3183,6 @@ mahogany
 mahuang
 maidenhair
 makomako
-malacca
 maleberry
 mallee
 mallow
@@ -3226,7 +3190,6 @@ malope
 malvasia
 mamey
 mammillaria
-mandarin
 mandrake
 manglietia
 mango
@@ -3296,13 +3259,11 @@ mildew
 milkcap
 milkweed
 milkwort
-millet
 millettia
 milo
 mimosa
 minniebush
 mint
-miro
 mistflower
 mistletoe
 miterwort
@@ -3335,7 +3296,6 @@ mum
 mung
 munj
 muscadine
-muscat
 mushroom
 muskmelon
 muskwood
@@ -3352,9 +3312,7 @@ naiad
 nakedwood
 nameko
 naranjilla
-narcissus
 nardoo
-nasturtium
 nectarine
 nectary
 needle
@@ -3368,12 +3326,10 @@ nettle
 nigella
 nightshade
 nimblewill
-nipa
 node
 nodule
 nopal
 nucellus
-nut
 nutgrass
 nutlet
 nutmeg
@@ -3398,7 +3354,6 @@ oosphere
 oospore
 opepe
 orach
-orange
 orangewood
 orchid
 orchil
@@ -3437,7 +3392,6 @@ papyrus
 paraphysis
 parenchyma
 parnassia
-paronychia
 parsley
 parsnip
 partridgeberry
@@ -3484,7 +3438,6 @@ phloem
 phlomis
 phlox
 phoenicophorium
-phoenix
 phyllode
 physostegia
 physostigmine
@@ -3507,7 +3460,6 @@ pinon
 pinwheel
 pip
 pipal
-piper
 pipewort
 pipsissewa
 pistachio
@@ -3582,11 +3534,9 @@ puttyroot
 pycnidium
 pyinma
 pyrene
-pyrethrum
 pythium
 pyxidium
 pyxie
-pyxis
 quandong
 quassia
 quercitron
@@ -3599,7 +3549,6 @@ rabbitwood
 raceme
 rachis
 radish
-raffia
 ragweed
 ragwort
 rambutan
@@ -3617,13 +3566,11 @@ receptacle
 redberry
 redbud
 redwood
-reed
 regnellidium
 relict
 reseda
 restharrow
 retem
-rheum
 rhizoctinia
 rhizoid
 rhizome
@@ -3631,7 +3578,6 @@ rhizomorph
 rhizopus
 rhododendron
 rhubarb
-rice
 ricegrass
 richweed
 rimu
@@ -3661,7 +3607,6 @@ rowanberry
 rue
 runner
 rupturewort
-rush
 rust
 rutabaga
 rye
@@ -3712,9 +3657,7 @@ scape
 schizocarp
 schizopetalon
 scilla
-scleroderma
 sclerotinia
-sclerotium
 scolopendrium
 scorpionweed
 scorzonera
@@ -3763,7 +3706,6 @@ skullcap
 skunkweed
 slip
 sloe
-smilax
 smilo
 smoothbark
 smut
@@ -3779,7 +3721,6 @@ soapberry
 soapweed
 soapwort
 sobralia
-soma
 sorghum
 sorgo
 sorrel
@@ -3849,7 +3790,6 @@ stock
 stocks
 stolon
 stoma
-stone
 stonecress
 stonecrop
 stool
@@ -3928,7 +3868,6 @@ thyrsopteris
 ti
 tidytips
 tiller
-timothy
 tipu
 titi
 toadflax
@@ -3944,7 +3883,6 @@ torch
 totara
 toyon
 tracheid
-tree
 treelet
 trefoil
 trillium
@@ -3952,14 +3890,12 @@ trompillo
 truffle
 trumpetwood
 trunk
-tuber
 tubercle
 tuberose
 tulip
 tulipwood
 tumbleweed
 tuna
-tupelo
 turmeric
 turnip
 turreae
@@ -3986,7 +3922,6 @@ vetch
 vetchling
 vine
 vinifera
-viola
 violet
 volva
 wahoo
@@ -4009,7 +3944,6 @@ waxycap
 weed
 weeds
 weigela
-weld
 welwitschia
 wheat
 wheatgrass
@@ -4048,7 +3982,6 @@ yew
 yucca
 zamia
 zebrawood
-zinfandel
 zinnia
 zoospore
 zoysia

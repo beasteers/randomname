@@ -393,7 +393,6 @@ allergic
 alleviated
 alleviative
 alliaceous
-allied
 alligatored
 alliterative
 allocable
@@ -413,7 +412,6 @@ alpestrine
 alpha
 alphabetic
 alphabetized
-alpine
 alright
 alterable
 altered
@@ -603,7 +601,6 @@ apocalyptic
 apocarpous
 apochromatic
 apocrine
-apocryphal
 apodal
 apodictic
 apolitical
@@ -1125,7 +1122,6 @@ blebbed
 blebby
 blemished
 blended
-blessed
 blighted
 blimpish
 blind
@@ -1168,7 +1164,6 @@ bodiless
 bodily
 boffo
 bogus
-bohemian
 boiled
 boisterous
 bold
@@ -1468,7 +1463,6 @@ categorical
 categorized
 catenulate
 cathartic
-catholic
 caudal
 caudate
 caulescent
@@ -1586,7 +1580,6 @@ chondritic
 choosy
 chopped
 choppy
-christian
 christianly
 christless
 christlike
@@ -1932,7 +1925,6 @@ conterminous
 contestable
 contiguous
 continent
-continental
 contingent
 continual
 continued
@@ -2168,7 +2160,6 @@ cycloid
 cylindrical
 cymose
 cynical
-cyprian
 cytomegalic
 cytopathogenic
 dabbled
@@ -2308,7 +2299,6 @@ delusive
 deluxe
 demanding
 demeaning
-democratic
 demolished
 demoniac
 demonic
@@ -2317,7 +2307,6 @@ demonstrated
 demonstrative
 demoralized
 demoralizing
-demotic
 demulcent
 demythologized
 denatured
@@ -2924,7 +2913,6 @@ enzootic
 eonian
 ephemeral
 epic
-epicurean
 epideictic
 epidemic
 epimorphic
@@ -3118,7 +3106,6 @@ exultant
 eyed
 eyeless
 eyelike
-fabian
 fabled
 fabricated
 fabulous
@@ -3566,7 +3553,6 @@ glutted
 gluttonous
 gnarled
 gnomish
-gnostic
 go
 goateed
 gobsmacked
@@ -3582,7 +3568,6 @@ gooey
 goofy
 gorgeous
 gory
-gothic
 gouty
 governing
 governmental
@@ -4496,7 +4481,6 @@ justified
 jutting
 juvenile
 juxtaposed
-kafkaesque
 kaleidoscopic
 katabatic
 keen
@@ -4891,7 +4875,6 @@ mental
 mercantile
 merciful
 merciless
-mercurial
 meretricious
 meridian
 meridional
@@ -4993,7 +4976,6 @@ modeled
 moderate
 moderating
 moderato
-modern
 moderne
 modernized
 modest
@@ -5183,7 +5165,6 @@ neurotic
 neuter
 neutral
 neutralized
-new
 newborn
 newfangled
 newfound
@@ -5407,7 +5388,6 @@ nonvisual
 nonvolatile
 nonwashable
 nonwoody
-nordic
 normal
 normative
 normotensive
@@ -5506,7 +5486,6 @@ offside
 offstage
 oiled
 oily
-old
 olden
 oldish
 oldline
@@ -5570,7 +5549,6 @@ orienting
 original
 orotund
 orphaned
-orthodox
 orthogonal
 orthomolecular
 orthostatic
@@ -5670,7 +5648,6 @@ owned
 oxidative
 oxidizable
 pachydermatous
-pacific
 packaged
 packed
 paid
@@ -5913,7 +5890,6 @@ planted
 plantigrade
 plastered
 plastic
-platonic
 platyrrhine
 plausible
 playable
@@ -6020,7 +5996,6 @@ powerful
 powerless
 practical
 practiced
-praetorian
 pragmatic
 prayerful
 preachy
@@ -6171,7 +6146,6 @@ protean
 protected
 protective
 proterozoic
-protestant
 protogeometric
 protractile
 protrusile
@@ -6403,7 +6377,6 @@ reflective
 reflexed
 reflexive
 reformative
-reformed
 refractive
 refractory
 refrigerant
@@ -7087,7 +7060,6 @@ spaced
 spare
 sparkling
 sparse
-spartan
 spastic
 spatiotemporal
 spatulate
@@ -7232,7 +7204,6 @@ stock
 stocked
 stockinged
 stodgy
-stoic
 stomatous
 stone
 stoneless
@@ -8303,7 +8274,6 @@ unintrusive
 uninvited
 uninviting
 uninvolved
-union
 uniparous
 unipolar
 unique

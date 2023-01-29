@@ -45,7 +45,6 @@ basis
 bearing
 billionth
 birth
-bond
 bonding
 bridge
 brotherhood
@@ -91,7 +90,6 @@ cosine
 cotangent
 dealings
 declension
-depression
 descent
 detail
 details
@@ -100,8 +98,6 @@ dialectics
 difference
 direction
 durative
-e
-east
 efficiency
 eighteenth
 eighth
@@ -195,14 +191,10 @@ nineteenth
 ninetieth
 ninth
 norm
-north
-northeast
-northwest
 obligation
 oddness
 odds
 operator
-opposition
 orientation
 orthogonality
 paradigm
@@ -264,15 +256,11 @@ seventh
 seventieth
 sharing
 sign
-sin
 sine
 sisterhood
 sixteenth
 sixth
 sixtieth
-south
-southeast
-southwest
 speed
 steprelationship
 stoichiometry
@@ -304,5 +292,4 @@ unit
 unrelatedness
 vertical
 voice
-west
 windward

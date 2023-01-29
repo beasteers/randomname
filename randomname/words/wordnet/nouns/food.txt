@@ -184,7 +184,6 @@ anchovy
 angelica
 anise
 anisette
-anjou
 antipasto
 aperitif
 appetizer
@@ -203,7 +202,6 @@ atole
 avocado
 baba
 babka
-bacon
 bagel
 baguet
 baklava
@@ -216,8 +214,6 @@ barbecue
 barley
 barleycorn
 barmbrack
-bartlett
-basil
 bass
 batter
 bean
@@ -228,8 +224,6 @@ beefsteak
 beer
 beet
 beetroot
-benedictine
-berry
 beverage
 bialy
 bigos
@@ -262,7 +256,6 @@ bluepoint
 board
 boards
 bock
-bologna
 bomber
 bonbon
 bonito
@@ -273,7 +266,6 @@ borsch
 bosc
 bouillabaisse
 bouillon
-bourbon
 bourguignon
 boysenberry
 brain
@@ -299,17 +291,14 @@ brittle
 broccoli
 broiler
 broth
-brownie
 brunch
 buckwheat
-buffalo
 buffalofish
 buffet
 bulgur
 bullshot
 bun
 burgoo
-burgundy
 burrito
 butter
 buttercrunch
@@ -358,12 +347,9 @@ center
 cereal
 ceriman
 challah
-champagne
 chapatti
 chard
-charlotte
 chaser
-cheddar
 cheese
 cheeseburger
 cheesecake
@@ -379,7 +365,6 @@ chicory
 chili
 chincapin
 chine
-chinook
 chip
 chipolata
 chipotle
@@ -421,11 +406,9 @@ coffee
 coffeecake
 coho
 coke
-cola
 coleslaw
 collards
 collation
-collins
 coloring
 comestible
 comfit
@@ -487,7 +470,6 @@ cumin
 cup
 cupcake
 cuppa
-curacao
 curd
 currant
 curry
@@ -499,11 +481,9 @@ cutlet
 dainty
 daiquiri
 damson
-danish
 date
 delicacy
 delicatessen
-demerara
 demiglace
 demitasse
 dessert
@@ -549,7 +529,6 @@ elderberry
 elixir
 elver
 emperor
-empire
 enchilada
 endive
 entrecote
@@ -603,7 +582,6 @@ forequarter
 foreshank
 formula
 frangipane
-frank
 frappe
 freestone
 fricandeau
@@ -630,7 +608,6 @@ gazpacho
 gelatin
 gem
 generic
-geneva
 genip
 genipap
 genoise
@@ -657,10 +634,8 @@ granola
 grape
 grapefruit
 grappa
-grass
 grasshopper
 gravy
-green
 greengage
 greens
 grenadine
@@ -687,7 +662,6 @@ haggis
 hake
 halal
 halibut
-ham
 hamburger
 hardbake
 hardtack
@@ -704,7 +678,6 @@ heel
 helping
 hen
 herb
-hero
 herring
 highball
 hindquarter
@@ -720,7 +693,6 @@ hooch
 horehound
 horsemeat
 horseradish
-host
 hotchpotch
 hotdog
 huckleberry
@@ -784,7 +756,6 @@ kvass
 lacing
 ladyfinger
 lager
-lamb
 lanseh
 lard
 larder
@@ -832,19 +803,15 @@ lunch
 lutefisk
 macaroni
 macaroon
-mace
 macedoine
 mackerel
-macon
 madrilene
 malmsey
 malt
 malted
 mamey
-mandarin
 mango
 mangosteen
-manhattan
 manicotti
 manna
 marang
@@ -871,7 +838,6 @@ mate
 matelote
 matzo
 mayonnaise
-mead
 meal
 meat
 meatball
@@ -883,9 +849,7 @@ meringue
 mescal
 mess
 metheglin
-milk
 milkshake
-millet
 milt
 mimosa
 mince
@@ -918,7 +882,6 @@ mullet
 mulligatawny
 multivitamin
 muscadine
-muscat
 mush
 mushroom
 muskellunge
@@ -927,15 +890,11 @@ mussel
 must
 mustard
 nacho
-nan
-napoleon
-nasturtium
 neck
 nectar
 nectarine
 negus
 nightcap
-nipa
 nonpareil
 noodle
 nosh
@@ -956,7 +915,6 @@ olive
 omelet
 onion
 oolong
-orange
 orangeade
 oregano
 oreo
@@ -964,7 +922,6 @@ orzo
 ouzo
 oyster
 pabulum
-paddy
 paella
 pancake
 panfish
@@ -986,7 +943,6 @@ pasture
 pasty
 pate
 patty
-pavlova
 pawpaw
 pea
 peach
@@ -994,7 +950,6 @@ peanut
 peanuts
 pear
 pecan
-peel
 pemmican
 penne
 penuche
@@ -1004,7 +959,6 @@ pepperoni
 perch
 perishable
 periwinkle
-perry
 persimmon
 pesto
 petfood
@@ -1043,7 +997,6 @@ plumcot
 poi
 poilu
 polenta
-pollack
 polony
 pomegranate
 pomelo
@@ -1057,7 +1010,6 @@ porkchop
 porkholt
 porridge
 port
-porter
 porterhouse
 posset
 potage
@@ -1098,7 +1050,6 @@ quail
 quandong
 quark
 quesadilla
-quiche
 quince
 rabbit
 rack
@@ -1125,7 +1076,6 @@ retsina
 rhubarb
 rib
 ribier
-rice
 rickey
 ricotta
 rigatoni
@@ -1135,7 +1085,6 @@ risotto
 rissole
 roast
 roaster
-rock
 rockfish
 roe
 roll
@@ -1166,7 +1115,6 @@ salad
 salami
 salmagundi
 salmi
-salmon
 salsa
 salsify
 salt
@@ -1181,7 +1129,6 @@ sapsago
 sardine
 sarsaparilla
 sashimi
-saskatoon
 sassafras
 satsuma
 sauce
@@ -1271,7 +1218,6 @@ sowbelly
 soy
 spaghetti
 spaghettini
-spam
 sparerib
 spareribs
 sparling
@@ -1279,7 +1225,6 @@ spatchcock
 special
 spice
 spinach
-split
 sprat
 spread
 spritzer
@@ -1294,7 +1239,6 @@ steak
 steamer
 stew
 stick
-stinger
 stock
 stockfish
 stocks
@@ -1323,7 +1267,6 @@ supper
 sushi
 sustenance
 swallow
-sweet
 sweetbread
 sweetening
 sweetmeat
@@ -1332,7 +1275,6 @@ swizzle
 swordfish
 syllabub
 syrup
-tabasco
 tabbouleh
 table
 taco
@@ -1362,7 +1304,6 @@ terrine
 thigh
 thyme
 timbale
-timothy
 tiramisu
 tisane
 toast
@@ -1389,7 +1330,6 @@ tuck
 tuna
 tunaburger
 turbot
-turkey
 turmeric
 turnip
 turnover
@@ -1419,14 +1359,12 @@ watercress
 watermelon
 weakfish
 wedge
-western
 wheat
 wheatflake
 whelk
 whey
 whip
 whiskey
-white
 whitebait
 whitefish
 whiting
@@ -1442,7 +1380,6 @@ yam
 yogurt
 yolk
 zabaglione
-zinfandel
 ziti
 zombi
 zombie
