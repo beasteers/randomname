@@ -10,12 +10,14 @@ get_groups_list
 getallcategories
 
 '''
-import os
+import collections
+import difflib
 import glob
 import fnmatch
 import functools
+import math
+import os
 import random
-import difflib
 
 
 WORD_CLASSES = ['adjectives', 'nouns', 'verbs', 'names', 'ipsum']
@@ -264,6 +266,141 @@ def getallcategories(d=''):
     # Replace OS-dependent separator with '/' which aligns with the input format
     # of the users.
     return [p.replace(os.sep, "/") for p in path_to_all_categories]
+
+
+def estimate_function_entropy(fun, func_word_samples=1000):
+    '''Estimate the entropy of a callable in bits by sampling.
+
+    This estimates the entropy of the return distribution of the function, based
+    on the assumption that each character is selected independently of the other
+    characters in the string. This will converge on an upper bound of true
+    function entropy as the number of samples goes towards infinity.
+
+    This will do well with typical ID functions like UUID, but is going to
+    coarsely overapproximate entropy for functions that have a lot of interdepent
+    structure in how they generate individual characters in an ID.
+
+    For example, consider the function:
+        def my_id_funct():
+          return 'bananas' if random.random() < 0.5 else 'bahamas'
+
+    Then the true entropy of this function is 1 bit, but this estimation will
+    yield 2 bits, because it will assume that the function also generates
+    'bahanas', 'banamas'.
+
+    Another issue is that if the ID function returns different length strings,
+    'ban' and 'banana', then the entropy estimate will be wildly off-base, since
+    it treats characters beyond the end of a string as special null characters
+    <X>, which leads to impossible words like 'bana<X>a'.
+
+    Regardless, this works for most 'typical' ID functions, in particular,
+    UUIDs. It may be better to produce strict underapproximations in the future,
+    to help conservatively estimate collision probabilities.
+    '''
+    samples = [fun() for _ in range(func_word_samples)]
+    samples = [s if isinstance(s, str) else str(s) for s in samples]
+    max_len = max(len(s) for s in samples)
+
+    # Count characters at each index, using None to represent that a
+    # string is shorter than the index.
+    chars_per_index = [dict() for _ in range(max_len)]
+    for sample in samples:
+        for i in range(max_len):
+            char = sample[i] if i < len(sample) else None
+            chars_per_index[i].setdefault(char, 0)
+            chars_per_index[i][char] += 1
+
+    # Calculate the entropy as the sum of the entropy of each index.
+    # Sum(-p(char) * log2(p(char))
+    entropy = 0.0
+    for i in range(max_len):
+        chars_dict = chars_per_index[i]
+        total = sum(chars_dict.values())
+        ps = [count / total for count in chars_dict.values()]
+        entropy += sum(-p * math.log2(p) for p in ps)
+    return entropy
+
+
+def word_list_entropy(word_list):
+    '''Calculates the entropy of a list of words in bits.'''
+    counts = collections.Counter(word_list)
+    total = len(word_list)
+    ps = [count / total for count in counts.values()]
+    return sum(-p * math.log2(p) for p in ps)
+
+
+def estimate_groups_list_entropy(fnames, func_word_samples=1000):
+    '''Estimate the entropy in bits of the groups_list.
+
+    The estimate is precise if no word_funcs are used in groups (e.g., 'uuid').
+    If functions are used, the estimate converges on an upper bound of the true
+    entropy as the number of samples goes towards infinity. We assume that
+    functions generate disjoint sets of IDs, independent of the other functions,
+    and disjoint from any of the wordlists. If this assumption is not true,
+    then the resulting estimate will be too high.
+    '''
+    groups_list = get_groups_list(fnames)
+    callables = [c for c in groups_list if callable(c)]
+    words = [c for c in groups_list if not callable(c)]
+    # Entropy is the expected surprise of a distribution, surprise
+    # of x being defined as -log p(x), formally, let W be the distribution
+    # over words W, then:
+    #   H(W) = E_{x ~ W}[ -log p(x) ]
+    # A domain is a set of possible values for x (either a wordlist
+    # or the set of values returned by an ID function in our setting).
+    # We assume domains to be non-overlapping and independent. This
+    # assumption may well not be true, but it's going to be fine for
+    # most usage scenarios. With the assumption, we can rewrite the
+    # above as:
+    #   H(W) = E_{D ~ Domain} E_{x ~ D} [-log p(x)]
+    # The probability that a word x is drawn from a given domain D is
+    # modeled by the expression p(x | D). Since we know that x is drawn
+    # from D (and does not occur in other domains), we can rewrite the
+    # -log p(x) = -log p(x and D) = -log (p(x | D) * p(D)). This gives us:
+    #   H(W) = E_{D ~ Domain} E_{x ~ D} [-log (p(x | D) * p(D))]
+    #   H(W) = E_{D ~ Domain} E_{x ~ D} [-log p(x | D) -  log(p(D))]
+    #   H(W) = E_{D ~ Domain} [E_{x ~ D} [-log p(x | D)] - log(p(D))]
+    # Now the inner expectation can be simplified as the entropy H(D)
+    # of the distribution over domains:
+    #   H(W) = E_{D ~ Domain} [ H(D) - log(p(D)) ]
+    # We can distribute the expectation over the subtraction and get:
+    #   H(W) = E_{D ~ Domain} [H(D)] + E_{D ~ Domain} [-log(p(D))]
+    # Now the second summand is just the entropy of the distribution
+    # over domains H(Domain). We call this the selector_h in the code below.
+    #   H(W) = E_{D ~ Domain} [H(D)] + H(Domain)
+    # For easier reading, we reorder the two summands.
+    #   H(W) = H(Domain) + E_{D ~ Domain} [H(D)]
+    # Expectations over finite domains can simply be computed as
+    # probability-weighted sums, which gives us:
+    #   H(W) = H(Domain) + Sum_{D in Domain} p(D) * H(D)
+    # We have derived that the entropy the distribution of generated words
+    # is equal to the entropy of the Domain selection process, which in our
+    # case is simply the choice between sampling from a wordlist and sampling
+    # from on of the functions, plus entropy of the selected domain weighted
+    # by its selection probability, now in code:
+    p_callable = 1 / len(groups_list)
+    p_word = len(words) / len(groups_list)
+    # This is the sum over p(D) * H(D) for callable Ds.
+    weighted_h_callable = sum(
+        p_callable * estimate_function_entropy(c, func_word_samples)
+        for c in callables)
+    # This is the sum over p(D) * H(D) for D being the wordlist.
+    weighted_h_wordlist = p_word * word_list_entropy(words)
+    # We can now compute the selection probabilities for each domain.
+    # Typically, this will be dominated by p_word, unless there are
+    # a LOT of functions in the mix.
+    selector_ps = [p_callable] * len(callables) + [p_word]
+    # We now use the entropy formula to calculate H(D), we guard the
+    # execution of math.log2, to ensure we don't evaluate math.log2(0).
+    selector_h = sum(0 if not p else -p * math.log2(p) for p in selector_ps)
+    # Now by H(p)
+    return selector_h + weighted_h_callable + weighted_h_wordlist
+
+
+def estimate_collision_probability(entropy_bits, num_samples):
+    '''Estimate the probability of a collision in a set of samples'''
+    return 1 - math.exp(-num_samples *
+                        (num_samples-1) / (2 ** entropy_bits))
 
 
 # get all available word classes and categories.
