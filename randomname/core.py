@@ -40,6 +40,19 @@ def available(k=None):
     return AVAILABLE[util.doalias(k)] if k else AVAILABLE
 
 
+def estimate_entropy(*groups, func_word_samples=1000):
+    '''Estimate the entropy of generate(*groups) in bits.'''
+    return sum(
+        util.estimate_groups_list_entropy(x, func_word_samples)
+        for x in groups or ('adj/', 'n/'))
+
+
+def estimate_collision_probability(*groups, num_ids, func_word_samples=1000):
+    '''Estimate collision probability over num_ids generate(*groups) calls.'''
+    entropy_bits = estimate_entropy(*groups, func_word_samples)
+    return util.estimate_collision_probability(entropy_bits, num_ids)
+
+
 import os
 import json
 class SavedList:
