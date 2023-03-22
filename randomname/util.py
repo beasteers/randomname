@@ -88,7 +88,7 @@ def load_file(name):
     if parts[0] in WORD_FUNCS:
         return [functools.partial(WORD_FUNCS[parts[0]], *(p for p in parts[1:] if p != '*'))]
 
-    with open(as_valid_path(name, required=True), 'r') as f:
+    with open(as_valid_path(name, required=True), 'r', encoding='utf-8') as f:
         return [
             l for l in (l.strip() for l in f.readlines())
             if l and l[0] not in ';#']
